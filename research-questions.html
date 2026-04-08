@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Questions - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-link {
+            color: #C4A8D4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #D94B8A;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #3D1A5C;
+        }
+
+        .option-container {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .option-card {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: #D94B8A;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(217, 75, 138, 0.2);
+        }
+
+        .option-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #D94B8A;
+            color: #FDF4F9;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .option-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .sub-option {
+            background: rgba(196, 168, 212, 0.1);
+            border-left: 4px solid #5BBFBA;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .sub-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .sub-option.option-b {
+            border-left-color: #C4A8D4;
+        }
+
+        .sub-option-label {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #3D1A5C;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-option-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        .question-list {
+            background: rgba(253, 244, 249, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .question-list ol {
+            margin-left: 20px;
+        }
+
+        .question-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .question-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .dashboard-note {
+            background: rgba(91, 191, 186, 0.15);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #5BBFBA;
+        }
+
+        .dashboard-note p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #3D1A5C;
+            margin: 0;
+        }
+
+        .highlight {
+            color: #D94B8A;
+            font-weight: 800;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: #FDF4F9;
+            color: #3D1A5C;
+            border: 3px solid #C4A8D4;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #D94B8A;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #D94B8A;
+            color: #FDF4F9;
+            border-color: #D94B8A;
+        }
+
+        .option-card.hidden {
+            display: none;
+        }
+
+        .data-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .data-link:hover {
+            background: #3D1A5C;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .option-card {
+                padding: 25px;
+            }
+
+            .option-title {
+                font-size: 1.5rem;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCIENCE</div>
+        <a href="index.html" class="nav-link">← Back to Overview</a>
+    </div>
+
+    <div class="container">
+        <h1>Research Questions</h1>
+
+        <div class="intro">
+            <p>As a student, you'll work on one of the following research challenges using the available datasets. Choose the question that excites you most, then design and build a data-driven solution to answer it.</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Options</button>
+            <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+            <button class="filter-btn" data-filter="knowledge-library">Knowledge Libraries</button>
+        </div>
+
+        <div class="option-container">
+            <!-- Option 1: Forest Biome Dashboard -->
+            <div class="option-card" data-type="dashboard">
+                <span class="option-badge">Option 1</span>
+                <h2 class="option-title">Forest Biome Dashboard</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create a <span class="highlight">forest biome dashboard</span> based on external data that presents <span class="highlight">3 key figures</span> for each of the following three questions:
+                        
+                        <div class="question-list">
+                            <ol>
+                                <li>What is the current state of biodiversity and the urgency for action?</li>
+                                <li>What external pressures and drivers affect conservation work?</li>
+                                <li>Which trends and opportunities for conservation are emerging and what future outlook can be expected?</li>
+                            </ol>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>A 3×3 dashboard with 3 key figures for each of the 3 questions</p>
+                        </div>
+                        <a href="data.html" class="data-link">View Available Datasets →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 2: Amazon Dashboard -->
+            <div class="option-card" data-type="dashboard">
+                <span class="option-badge">Option 2</span>
+                <h2 class="option-title">Amazon Dashboard</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create a <span class="highlight">dashboard for the Amazon</span> region based on external data that presents <span class="highlight">3 key figures</span> for each of the following three questions:
+                        
+                        <div class="question-list">
+                            <ol>
+                                <li>What is the current state of biodiversity and the urgency for action?</li>
+                                <li>What external pressures and drivers affect conservation work?</li>
+                                <li>Which trends and opportunities for conservation are emerging and what future outlook can be expected?</li>
+                            </ol>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>A 3×3 dashboard with 3 key figures for each of the 3 questions</p>
+                        </div>
+                        <a href="data.html" class="data-link">View Available Datasets →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 3: Congo Basin / TRIDOM Dashboard -->
+            <div class="option-card" data-type="dashboard">
+                <span class="option-badge">Option 3</span>
+                <h2 class="option-title">Congo Basin / TRIDOM Dashboard</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create a <span class="highlight">dashboard for the Congo Basin / TRIDOM</span> region based on external data that presents <span class="highlight">3 key figures</span> for each of the following three questions:
+                        
+                        <div class="question-list">
+                            <ol>
+                                <li>What is the current state of biodiversity and the urgency for action?</li>
+                                <li>What external pressures and drivers affect conservation work?</li>
+                                <li>Which trends and opportunities for conservation are emerging and what future outlook can be expected?</li>
+                            </ol>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>A 3×3 dashboard with 3 key figures for each of the 3 questions</p>
+                        </div>
+                        <a href="data.html" class="data-link">View Available Datasets →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 4: Mekong Delta Dashboard -->
+            <div class="option-card" data-type="dashboard">
+                <span class="option-badge">Option 4</span>
+                <h2 class="option-title">Mekong Delta Dashboard</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create a <span class="highlight">dashboard for the Mekong Delta</span> region based on external data that presents <span class="highlight">3 key figures</span> for each of the following three questions:
+                        
+                        <div class="question-list">
+                            <ol>
+                                <li>What is the current state of biodiversity and the urgency for action?</li>
+                                <li>What external pressures and drivers affect conservation work?</li>
+                                <li>Which trends and opportunities for conservation are emerging and what future outlook can be expected?</li>
+                            </ol>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>A 3×3 dashboard with 3 key figures for each of the 3 questions</p>
+                        </div>
+                        <a href="data.html" class="data-link">View Available Datasets →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 5: Amazon Knowledge Library -->
+            <div class="option-card" data-type="knowledge-library">
+                <span class="option-badge">Option 5</span>
+                <h2 class="option-title">Amazon Knowledge Library</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create an interactive <span class="highlight">knowledge library</span> for the <span class="highlight">Amazon</span> region based on the provided factsheet.
+                        
+                        <div class="question-list">
+                            <p style="font-weight: 600; margin-bottom: 10px; font-size: 0.95rem;">The knowledge library should:</p>
+                            <ul style="margin-left: 20px; list-style: disc;">
+                                <li>Provide an overview and relevant figures on a specific topic requested by the user</li>
+                                <li>Indicate if information is missing or unavailable</li>
+                                <li>Allow users to add additional information and sources to the library</li>
+                                <li>Be interactive and searchable</li>
+                            </ul>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>Think of it as a living, collaborative knowledge base for the Amazon region</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 6: Congo Basin / TRIDOM Knowledge Library -->
+            <div class="option-card" data-type="knowledge-library">
+                <span class="option-badge">Option 6</span>
+                <h2 class="option-title">Congo Basin / TRIDOM Knowledge Library</h2>
+                
+                <div class="sub-option">
+                    <div class="sub-option-text">
+                        Create an interactive <span class="highlight">knowledge library</span> for the <span class="highlight">Congo Basin / TRIDOM</span> region based on the provided factsheet.
+                        
+                        <div class="question-list">
+                            <p style="font-weight: 600; margin-bottom: 10px; font-size: 0.95rem;">The knowledge library should:</p>
+                            <ul style="margin-left: 20px; list-style: disc;">
+                                <li>Provide an overview and relevant figures on a specific topic requested by the user</li>
+                                <li>Indicate if information is missing or unavailable</li>
+                                <li>Allow users to add additional information and sources to the library</li>
+                                <li>Be interactive and searchable</li>
+                            </ul>
+                        </div>
+
+                        <div class="dashboard-note">
+                            <p>Think of it as a living, collaborative knowledge base for the Congo Basin region</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const optionCards = document.querySelectorAll('.option-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+
+                // Filter cards
+                optionCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        const cardType = card.getAttribute('data-type');
+                        if (cardType === filterValue) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

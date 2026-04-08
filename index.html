@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Day - Science Disco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .title-section {
+            position: sticky;
+            top: 40px;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #D94B8A;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .agenda-section {
+            background: #FDF4F9;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .agenda-item {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #C4A8D4;
+        }
+
+        .agenda-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.8;
+            color: #3D1A5C;
+            text-align: justify;
+        }
+
+        .agenda-item.clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .agenda-item.clickable:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(217, 75, 138, 0.05) 0%, transparent 100%);
+            border-left: 4px solid #D94B8A;
+            padding-left: 36px;
+        }
+
+        .agenda-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .agenda-item h2 {
+            position: relative;
+        }
+
+        .agenda-item.clickable h2::after {
+            content: '→';
+            position: absolute;
+            right: 0;
+            color: #D94B8A;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .agenda-item.clickable:hover h2::after {
+            opacity: 1;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .title-section {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .logo {
+                position: static;
+                display: block;
+                text-align: right;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .agenda-section {
+                padding: 25px;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">SCIENCE</div>
+    
+    <div class="container">
+        <div class="title-section">
+            <h1>DISCOVERY<br>DAY</h1>
+        </div>
+
+        <div class="agenda-section">
+            <div class="agenda-item clickable">
+                <a href="research-questions.html">
+                    <h2>Welcome</h2>
+                    <p>We kick off the day, followed by a short presentation from WWF on the research question and why it matters to them.</p>
+                </a>
+            </div>
+
+            <div class="agenda-item clickable">
+                <a href="data.html">
+                    <h2>Get to Know Your Data</h2>
+                    <p>Teams of four, each with a dedicated coach, start with an icebreaker that doubles as a data exploration exercise: which data field do you identify most with, and why?</p>
+                </a>
+            </div>
+
+            <div class="agenda-item clickable">
+                <a href="dashboard-builder.html">
+                    <h2>Design Your Product</h2>
+                    <p>Before touching any code, teams whiteboard what their final website should look like, using a catalog of chart types to shape their vision — maps, donut charts, heatmaps, interactive diagrams.</p>
+                </a>
+            </div>
+
+            <div class="agenda-item">
+                <h2>Analyse</h2>
+                <p>Teams work through Jupyter notebooks, using GreenPT to qualitatively analyse the data and export their findings to CSV.</p>
+            </div>
+
+            <div class="agenda-item">
+                <h2>Build</h2>
+                <p>Using GitHub Copilot, teams generate a single-page website hosted on GitHub Pages, based on a technical requirements file we provide and the product brief they created during the design phase.</p>
+            </div>
+
+            <div class="agenda-item">
+                <h2>Showcase and Borrel</h2>
+                <p>Teams present their live websites on the big screen, then we celebrate with a borrel where everyone can walk around and explore each other's work.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

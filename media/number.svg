@@ -1,0 +1,5 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="60" y="75" font-family="Montserrat, sans-serif" font-size="48" font-weight="900" fill="#D94B8A" text-anchor="middle">87</text>
+  <text x="60" y="95" font-family="Montserrat, sans-serif" font-size="12" font-weight="600" fill="#3D1A5C" text-anchor="middle">KPI VALUE</text>
+  <path d="M 30 40 L 40 30 L 50 35 L 60 28 L 70 32 L 80 25 L 90 30" stroke="#5BBFBA" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

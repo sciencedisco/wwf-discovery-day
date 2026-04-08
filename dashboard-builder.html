@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Builder - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-link {
+            color: #C4A8D4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #D94B8A;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        .builder-section {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #3D1A5C;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #D94B8A;
+        }
+
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .grid-card {
+            background: rgba(196, 168, 212, 0.1);
+            border: 3px dashed #C4A8D4;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-card.filled {
+            border-style: solid;
+            border-color: #5BBFBA;
+            background: rgba(91, 191, 186, 0.05);
+        }
+
+        .grid-card-header {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #D94B8A;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-selector {
+            margin-bottom: 15px;
+        }
+
+        .chart-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .chart-selector select:focus {
+            outline: none;
+            border-color: #D94B8A;
+        }
+
+        .chart-preview {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            min-height: 150px;
+            color: #C4A8D4;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+
+        .chart-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .summary-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            resize: none;
+            min-height: 60px;
+        }
+
+        .summary-input:focus {
+            outline: none;
+            border-color: #D94B8A;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #D94B8A;
+            color: #FDF4F9;
+        }
+
+        .btn-primary:hover {
+            background: #3D1A5C;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 968px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .builder-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCIENCE</div>
+        <a href="index.html" class="nav-link">← Back to Overview</a>
+    </div>
+
+    <div class="container">
+        <h1>Dashboard Builder</h1>
+
+        <div class="builder-section">
+            <div class="input-group">
+                <label for="dashboard-title">Dashboard Title</label>
+                <input type="text" id="dashboard-title" placeholder="e.g., Forest Biodiversity Dashboard">
+            </div>
+
+            <div class="input-group">
+                <label for="dashboard-intro">Dashboard Introduction</label>
+                <textarea id="dashboard-intro" placeholder="Brief description of what your dashboard shows and why it matters..."></textarea>
+            </div>
+
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: #3D1A5C; margin-bottom: 20px; text-transform: uppercase;">3×3 Dashboard Grid</h2>
+
+            <div class="dashboard-grid">
+                <!-- Row 1: Question 1 -->
+                <div class="grid-card" data-cell="1">
+                    <div class="grid-card-header">Question 1 - Chart 1</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(1, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-1">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="2">
+                    <div class="grid-card-header">Question 1 - Chart 2</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(2, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-2">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="3">
+                    <div class="grid-card-header">Question 1 - Chart 3</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(3, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-3">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <!-- Row 2: Question 2 -->
+                <div class="grid-card" data-cell="4">
+                    <div class="grid-card-header">Question 2 - Chart 1</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(4, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-4">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="5">
+                    <div class="grid-card-header">Question 2 - Chart 2</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(5, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-5">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="6">
+                    <div class="grid-card-header">Question 2 - Chart 3</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(6, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-6">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <!-- Row 3: Question 3 -->
+                <div class="grid-card" data-cell="7">
+                    <div class="grid-card-header">Question 3 - Chart 1</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(7, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-7">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="8">
+                    <div class="grid-card-header">Question 3 - Chart 2</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(8, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-8">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+
+                <div class="grid-card" data-cell="9">
+                    <div class="grid-card-header">Question 3 - Chart 3</div>
+                    <div class="chart-selector">
+                        <select onchange="updateChart(9, this.value)">
+                            <option value="">Select chart type...</option>
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="map">Map</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="heatmap">Heatmap</option>
+                            <option value="treemap">Treemap</option>
+                            <option value="gauge">Gauge</option>
+                            <option value="number">Number/KPI</option>
+                        </select>
+                    </div>
+                    <div class="chart-preview" id="preview-9">Select a chart type</div>
+                    <textarea class="summary-input" placeholder="Quick summary of this figure..."></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="exportDesign()">Export Design</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chartImages = {
+            'bar': 'media/bar-chart.svg',
+            'line': 'media/line-chart.svg',
+            'pie': 'media/pie-chart.svg',
+            'donut': 'media/donut-chart.svg',
+            'map': 'media/map.svg',
+            'scatter': 'media/scatter.svg',
+            'heatmap': 'media/heatmap.svg',
+            'treemap': 'media/treemap.svg',
+            'gauge': 'media/gauge.svg',
+            'number': 'media/number.svg'
+        };
+
+        function updateChart(cellId, chartType) {
+            const preview = document.getElementById(`preview-${cellId}`);
+            const card = document.querySelector(`[data-cell="${cellId}"]`);
+            
+            if (chartType) {
+                preview.innerHTML = `<img src="${chartImages[chartType]}" alt="${chartType} chart">`;
+                card.classList.add('filled');
+            } else {
+                preview.innerHTML = 'Select a chart type';
+                card.classList.remove('filled');
+            }
+        }
+
+        function exportDesign() {
+            const title = document.getElementById('dashboard-title').value || 'Untitled Dashboard';
+            const intro = document.getElementById('dashboard-intro').value || 'No introduction provided';
+            
+            // Build markdown content
+            let markdown = `# ${title}\n\n`;
+            markdown += `## Dashboard Introduction\n\n${intro}\n\n`;
+            markdown += `---\n\n## Dashboard Grid (3×3)\n\n`;
+            
+            const questions = [
+                'Question 1: What is the current state of biodiversity and the urgency for action?',
+                'Question 2: What external pressures and drivers affect conservation work?',
+                'Question 3: Which trends and opportunities for conservation are emerging and what future outlook can be expected?'
+            ];
+            
+            // Group by questions (3 charts each)
+            for (let q = 0; q < 3; q++) {
+                markdown += `### ${questions[q]}\n\n`;
+                
+                for (let c = 1; c <= 3; c++) {
+                    const cellId = q * 3 + c;
+                    const card = document.querySelector(`[data-cell="${cellId}"]`);
+                    const select = card.querySelector('select');
+                    const summary = card.querySelector('textarea').value;
+                    const chartType = select.value;
+                    
+                    markdown += `#### Chart ${c}\n\n`;
+                    markdown += `**Chart Type:** ${chartType ? chartType.charAt(0).toUpperCase() + chartType.slice(1) : 'Not selected'}\n\n`;
+                    markdown += `**Summary:** ${summary || 'No summary provided'}\n\n`;
+                }
+                
+                markdown += `---\n\n`;
+            }
+            
+            markdown += `## Implementation Notes\n\n`;
+            markdown += `- Use the Science Disco design guidelines for colors and typography\n`;
+            markdown += `- Ensure all charts are clearly labeled with titles and legends\n`;
+            markdown += `- Keep backgrounds light for readability\n`;
+            markdown += `- Test the dashboard on a laptop screen at full width\n\n`;
+            markdown += `## Data Sources\n\n`;
+            markdown += `Refer to the data.html page for available datasets and sources.\n`;
+
+            // Create downloadable markdown file
+            const dataStr = markdown;
+            const dataUri = 'data:text/markdown;charset=utf-8,' + encodeURIComponent(dataStr);
+            const exportFileDefaultName = `${title.toLowerCase().replace(/\s+/g, '-')}-spec.md`;
+
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+
+            alert('Dashboard design exported!');
+        }
+    </script>
+</body>
+</html>

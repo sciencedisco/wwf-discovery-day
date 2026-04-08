@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get to Know Your Data - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-link {
+            color: #C4A8D4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #D94B8A;
+        }
+
+        h1 {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: #C4A8D4;
+            font-weight: 400;
+        }
+
+        .filters {
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: rgba(253, 244, 249, 0.1);
+            color: #FDF4F9;
+            border: 2px solid #C4A8D4;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            background: #C4A8D4;
+            color: #3D1A5C;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #D94B8A;
+            border-color: #D94B8A;
+            color: #FDF4F9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dataset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dataset-card {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .dataset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(217, 75, 138, 0.2);
+            border-color: #D94B8A;
+        }
+
+        .dataset-card.hidden {
+            display: none;
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .card-category.drivers {
+            background: #C4A8D4;
+        }
+
+        .card-category.conservation {
+            background: #D94B8A;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #3D1A5C;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .card-source {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #5BBFBA;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .card-source:hover {
+            color: #D94B8A;
+        }
+
+        .card-source::before {
+            content: '🔗';
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .dataset-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCIENCE</div>
+        <a href="index.html" class="nav-link">← Back to Overview</a>
+    </div>
+
+    <h1>Get to Know Your Data</h1>
+    <div class="subtitle">Explore the datasets available for your discovery journey. Click on a card to dive deeper.</div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Datasets</button>
+        <button class="filter-btn" data-filter="biodiversity">Biodiversity Data</button>
+        <button class="filter-btn" data-filter="drivers">Drivers & Pressures</button>
+        <button class="filter-btn" data-filter="conservation">Conservation Trends</button>
+    </div>
+
+    <div class="container">
+        <div class="dataset-grid" id="datasetGrid">
+            <!-- Biodiversity Data Sources -->
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Living Planet Database</h3>
+                <p class="card-description">Comprehensive global dataset tracking population trends of vertebrate species. Contains time-series data on thousands of species populations worldwide, essential for understanding biodiversity change.</p>
+                <a href="https://www.livingplanetindex.org/data_portal" target="_blank" class="card-source">livingplanetindex.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Global Forest Watch</h3>
+                <p class="card-description">Near real-time information about forests worldwide. Monitor deforestation, forest fires, and land use changes with satellite imagery and interactive maps.</p>
+                <a href="https://www.globalforestwatch.org" target="_blank" class="card-source">globalforestwatch.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Global Forest Resource Assessment</h3>
+                <p class="card-description">FAO's comprehensive assessment of the world's forests. Provides data on forest extent, characteristics, management, uses and values across all countries.</p>
+                <a href="https://www.fao.org/forest-resources-assessment/en" target="_blank" class="card-source">fao.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Biodiversity Intactness Index</h3>
+                <p class="card-description">Measures how much of an area's original biodiversity remains despite human impacts. Provides insights into ecosystem health and degradation levels.</p>
+                <a href="https://www.nhm.ac.uk/our-science/services/data/biodiversity-intactness-index.html" target="_blank" class="card-source">nhm.ac.uk</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Global Tree Assessment</h3>
+                <p class="card-description">The first global assessment of all the world's tree species. Evaluates conservation status and threats facing tree species worldwide.</p>
+                <a href="https://www.bgci.org/our-work/networks/gta/" target="_blank" class="card-source">bgci.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">IUCN Red List</h3>
+                <p class="card-description">World's most comprehensive inventory of the global conservation status of species. Provides detailed information on threats, population trends, and conservation needs.</p>
+                <a href="https://www.iucnredlist.org" target="_blank" class="card-source">iucnredlist.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Map of Life</h3>
+                <p class="card-description">Integrates species distribution data from multiple sources. Provides comprehensive maps showing where species live and how their ranges change over time.</p>
+                <a href="https://mol.org" target="_blank" class="card-source">mol.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="biodiversity">
+                <span class="card-category">Biodiversity Data</span>
+                <h3 class="card-title">Essential Biodiversity Variables</h3>
+                <p class="card-description">Standardized measurements of biodiversity change. Harmonizes biodiversity data across different scales and ecosystems for global monitoring.</p>
+                <a href="https://portal.geobon.org/datasets" target="_blank" class="card-source">geobon.org</a>
+            </div>
+
+            <!-- Drivers and Pressures -->
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">Economic Complexity Index</h3>
+                <p class="card-description">Measures the knowledge intensity and sophistication of a country's productive structure. Links economic development with environmental impact patterns.</p>
+                <a href="https://oec.world/en/rankings/eci/hs6/hs96?tab=ranking" target="_blank" class="card-source">oec.world</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">Multidimensional Poverty Index</h3>
+                <p class="card-description">Goes beyond income to measure acute multidimensional poverty. Shows how poverty intersects with environmental resource use and conservation challenges.</p>
+                <a href="https://hdr.undp.org/content/2025-global-multidimensional-poverty-index-mpi#/indicies/MPI" target="_blank" class="card-source">undp.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">Human Rights Watch</h3>
+                <p class="card-description">Investigates and reports on human rights conditions. Important context for understanding social factors affecting conservation and environmental protection.</p>
+                <a href="https://www.hrw.org/africa/cameroon" target="_blank" class="card-source">hrw.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">Fragile States Index</h3>
+                <p class="card-description">Assessment of state vulnerability across political, social, and economic indicators. Highlights governance challenges that impact environmental management.</p>
+                <a href="https://fragilestatesindex.org" target="_blank" class="card-source">fragilestatesindex.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">Human Footprint</h3>
+                <p class="card-description">Maps the cumulative impact of direct human pressures on the environment. Shows where and how human activities affect natural ecosystems globally.</p>
+                <a href="https://wcshumanfootprint.org" target="_blank" class="card-source">wcshumanfootprint.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">OECD Data Explorer</h3>
+                <p class="card-description">Comprehensive economic and social statistics from OECD countries. Includes environmental indicators, resource use, and sustainability metrics.</p>
+                <a href="https://data-explorer.oecd.org" target="_blank" class="card-source">oecd.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="drivers">
+                <span class="card-category drivers">Drivers & Pressures</span>
+                <h3 class="card-title">FAOStat</h3>
+                <p class="card-description">Food and Agriculture Organization's statistical database. Covers agricultural production, land use, pesticides, and other factors affecting ecosystems.</p>
+                <a href="https://www.fao.org/faostat/en/#country/21" target="_blank" class="card-source">fao.org</a>
+            </div>
+
+            <!-- Conservation Trends -->
+            <div class="dataset-card" data-category="conservation">
+                <span class="card-category conservation">Conservation Trends</span>
+                <h3 class="card-title">Protected Areas Database</h3>
+                <p class="card-description">Global database of terrestrial and marine protected areas. Track coverage, effectiveness, and management of conservation zones worldwide.</p>
+                <a href="https://www.protectedplanet.net/en" target="_blank" class="card-source">protectedplanet.net</a>
+            </div>
+
+            <div class="dataset-card" data-category="conservation">
+                <span class="card-category conservation">Conservation Trends</span>
+                <h3 class="card-title">PADDD Tracker</h3>
+                <p class="card-description">Documents Protected Area Downgrading, Downsizing and Degazettement events. Tracks changes in legal protections and their impact on conservation.</p>
+                <a href="https://www.padddtracker.org" target="_blank" class="card-source">padddtracker.org</a>
+            </div>
+
+            <div class="dataset-card" data-category="conservation">
+                <span class="card-category conservation">Conservation Trends</span>
+                <h3 class="card-title">Environmental Performance Index</h3>
+                <p class="card-description">Ranks countries on environmental health and ecosystem vitality. Measures policy performance across multiple environmental indicators.</p>
+                <a href="https://epi.yale.edu" target="_blank" class="card-source">epi.yale.edu</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const datasetCards = document.querySelectorAll('.dataset-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+
+                // Filter cards
+                datasetCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all') {
+                        card.classList.remove('hidden');
+                    } else if (category === filterValue) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Card click functionality (placeholder for future detail view)
+        datasetCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.card-title').textContent;
+                console.log(`Selected dataset: ${title}`);
+                // Future: Navigate to detail view or show modal with table data
+            });
+        });
+    </script>
+</body>
+</html>
