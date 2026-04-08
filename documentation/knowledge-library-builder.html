@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Library Builder - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+            margin: -40px -20px 40px -20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 2px solid #D94B8A;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #C4A8D4;
+            line-height: 1.8;
+        }
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .facets-section {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .facets-section h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #D94B8A;
+            padding-bottom: 10px;
+        }
+
+        .facet-group {
+            margin-bottom: 20px;
+        }
+
+        .facet-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #3D1A5C;
+            margin-bottom: 8px;
+        }
+
+        .facet-group input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .add-facet-btn {
+            width: 100%;
+            padding: 10px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .add-facet-btn:hover {
+            background: #3D1A5C;
+            transform: translateY(-2px);
+        }
+
+        .facet-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #C4A8D4;
+            color: #3D1A5C;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .facet-chip button {
+            background: none;
+            border: none;
+            color: #3D1A5C;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        .main-content-area {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-left: 6px solid #D94B8A;
+            padding-left: 15px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-input {
+            padding: 15px;
+            border: 2px solid #C4A8D4;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .category-input:focus {
+            outline: none;
+            border-color: #D94B8A;
+        }
+
+        .content-structure {
+            background: rgba(196, 168, 212, 0.1);
+            border: 2px dashed #C4A8D4;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .content-structure h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #D94B8A;
+            margin-bottom: 15px;
+        }
+
+        .structure-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .structure-item input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .structure-item select {
+            padding: 12px;
+            border: 2px solid #C4A8D4;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: white;
+        }
+
+        .export-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .export-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #D94B8A;
+            color: #FDF4F9;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .export-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(91, 191, 186, 0.4);
+        }
+
+        .export-section p {
+            color: #C4A8D4;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .builder-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .facets-section {
+                position: relative;
+                top: 0;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-button">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="prework.html#github">GitHub Setup</a></li>
+                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-button active">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="../index.html">Overview</a></li>
+                        <li><a href="research-questions.html">Research Questions</a></li>
+                        <li><a href="data.html">Get to Know Your Data</a></li>
+                        <li><a href="dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="analyse-guide.html">Analyse</a></li>
+                        <li><a href="build-guide.html">Build</a></li>
+                        <li><a href="showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-button">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="resources.html#cv">CV Tips</a></li>
+                        <li><a href="resources.html#interview">Interview Prep</a></li>
+                        <li><a href="resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content">
+    <div class="container">
+        <div class="page-header">
+            <h1>Knowledge Library Builder</h1>
+            <a href="../index.html" class="back-btn">← Back to Overview</a>
+        </div>
+
+        <div class="intro">
+            <p>Design your interactive knowledge library structure. Define the categories users can browse, the facets they can filter by, and how each knowledge item is structured. This tool helps you plan before you build!</p>
+        </div>
+
+        <div class="builder-layout">
+            <!-- Left Sidebar: Facets/Filters -->
+            <div class="facets-section">
+                <h3>Filter Facets</h3>
+                
+                <div class="facet-group">
+                    <label>Add Filter Category:</label>
+                    <input type="text" id="facetInput" placeholder="e.g., Data Type">
+                </div>
+                
+                <button class="add-facet-btn" onclick="addFacet()">+ Add Facet</button>
+                
+                <div id="facetsList" style="margin-top: 20px;">
+                    <!-- Facets will be added here -->
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="main-content-area">
+                <div class="section-title">Main Categories</div>
+                <p style="margin-bottom: 20px; color: #666;">Define 6-8 main browseable categories for your knowledge library:</p>
+                
+                <div class="categories-grid" id="categoriesGrid">
+                    <input type="text" class="category-input" placeholder="Category 1" id="cat1">
+                    <input type="text" class="category-input" placeholder="Category 2" id="cat2">
+                    <input type="text" class="category-input" placeholder="Category 3" id="cat3">
+                    <input type="text" class="category-input" placeholder="Category 4" id="cat4">
+                    <input type="text" class="category-input" placeholder="Category 5" id="cat5">
+                    <input type="text" class="category-input" placeholder="Category 6" id="cat6">
+                </div>
+
+                <div class="section-title" style="margin-top: 40px;">Knowledge Item Structure</div>
+                <p style="margin-bottom: 20px; color: #666;">Define what information each knowledge item should contain:</p>
+
+                <div class="content-structure">
+                    <h4>Basic Information</h4>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Title:</label>
+                        <input type="text" id="field1" placeholder="Short descriptive title">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Summary:</label>
+                        <input type="text" id="field2" placeholder="1-2 sentence overview">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Content Type:</label>
+                        <select id="contentType">
+                            <option value="text">Text & Figures</option>
+                            <option value="interactive">Interactive Visualization</option>
+                            <option value="comparison">Data Comparison</option>
+                            <option value="timeline">Timeline</option>
+                            <option value="map">Geographic Map</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="content-structure">
+                    <h4>Data & Sources</h4>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Key Figures:</label>
+                        <input type="number" id="figureCount" placeholder="How many?" value="3" min="1" max="10">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Data Source:</label>
+                        <input type="text" id="dataSource" placeholder="e.g., WWF Factsheet, External API">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 120px; font-weight: 600;">Last Updated:</label>
+                        <input type="text" id="lastUpdated" placeholder="Date field for freshness">
+                    </div>
+                </div>
+
+                <div class="content-structure">
+                    <h4>User Interactions</h4>
+                    <div class="structure-item">
+                        <label style="min-width: 150px; font-weight: 600;">Allow Comments:</label>
+                        <select id="allowComments">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 150px; font-weight: 600;">Allow Contributions:</label>
+                        <select id="allowContributions">
+                            <option value="yes">Yes - Users can add info</option>
+                            <option value="no">No - Read-only</option>
+                        </select>
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 150px; font-weight: 600;">Flag Missing Data:</label>
+                        <select id="flagMissing">
+                            <option value="yes">Yes - Show what's missing</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-section">
+            <button class="export-btn" onclick="exportLibrarySpec()">📥 Export Library Specification</button>
+            <p>Downloads a markdown file with your knowledge library structure to guide your build with GitHub Copilot</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="analyse-guide.html" style="display: inline-block; padding: 15px 40px; background: #D94B8A; color: #FDF4F9; text-decoration: none; border-radius: 30px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.background='#3D1A5C'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#D94B8A'; this.style.transform='translateY(0)';">Next: Analyse Your Data →</a>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        let facets = [];
+
+        function addFacet() {
+            const input = document.getElementById('facetInput');
+            const facetName = input.value.trim();
+            
+            if (facetName) {
+                facets.push(facetName);
+                renderFacets();
+                input.value = '';
+            }
+        }
+
+        function removeFacet(index) {
+            facets.splice(index, 1);
+            renderFacets();
+        }
+
+        function renderFacets() {
+            const container = document.getElementById('facetsList');
+            container.innerHTML = facets.map((facet, index) => `
+                <div class="facet-chip">
+                    ${facet}
+                    <button onclick="removeFacet(${index})" title="Remove">×</button>
+                </div>
+            `).join('');
+        }
+
+        function exportLibrarySpec() {
+            // Gather all inputs
+            const categories = [];
+            for (let i = 1; i <= 6; i++) {
+                const val = document.getElementById(`cat${i}`).value.trim();
+                if (val) categories.push(val);
+            }
+
+            const spec = `# Knowledge Library Specification
+
+## Project Overview
+This knowledge library provides an interactive, filterable interface for exploring conservation data.
+
+## Region
+${window.location.search.includes('amazon') ? 'Amazon' : window.location.search.includes('congo') ? 'Congo Basin / TRIDOM' : '[Your Region]'}
+
+## Main Categories (${categories.length})
+${categories.map((cat, i) => `${i + 1}. **${cat}**`).join('\n')}
+
+## Filter Facets (${facets.length})
+Left sidebar filters that users can apply:
+${facets.map((f, i) => `${i + 1}. ${f}`).join('\n')}
+
+## Knowledge Item Structure
+
+### Basic Information
+- **Title**: ${document.getElementById('field1').value || 'Short descriptive title'}
+- **Summary**: ${document.getElementById('field2').value || '1-2 sentence overview'}
+- **Content Type**: ${document.getElementById('contentType').value}
+
+### Data & Sources
+- **Key Figures to Display**: ${document.getElementById('figureCount').value} per item
+- **Primary Data Source**: ${document.getElementById('dataSource').value || '[Specify source]'}
+- **Last Updated Field**: ${document.getElementById('lastUpdated').value || 'Display freshness date'}
+
+### User Interactions
+- **Comments Enabled**: ${document.getElementById('allowComments').value === 'yes' ? 'Yes' : 'No'}
+- **User Contributions**: ${document.getElementById('allowContributions').value === 'yes' ? 'Allowed - users can add information' : 'Read-only'}
+- **Missing Data Indicator**: ${document.getElementById('flagMissing').value === 'yes' ? 'Show when data is unavailable' : 'Not shown'}
+
+## Layout Structure
+
+\`\`\`
+┌─────────────────────────────────────────┐
+│  [Search with Autocomplete]             │
+├──────────┬──────────────────────────────┤
+│ FILTERS  │  KNOWLEDGE ITEMS             │
+│          │                              │
+│ Facet 1  │  [Item Card 1]               │
+│ Facet 2  │  [Item Card 2]               │
+│ Facet 3  │  [Item Card 3]               │
+│          │                              │
+└──────────┴──────────────────────────────┘
+\`\`\`
+
+## Technical Requirements
+
+### Search Functionality
+- Autocomplete dropdown showing matching categories/topics
+- Predetermined search terms only (no free-text)
+- Quick filtering as user types
+
+### Filtering System
+- Left sidebar with ${facets.length} facet groups
+- Checkboxes or toggles for each filter option
+- Multiple filters can be active simultaneously
+- Clear visual feedback for active filters
+
+### Knowledge Item Display
+- Grid or list view of filtered items
+- Each item shows: title, summary, key figure(s)
+- Click item to view full details
+- Visual indicator for missing/incomplete data
+
+### Data Management
+${document.getElementById('allowContributions').value === 'yes' ? '- Form for users to submit new information\n- Admin review before adding to library' : '- Static content loaded from factsheets\n- Read-only display'}
+
+## Next Steps
+1. Analyze factsheet data in Jupyter notebook
+2. Extract and structure ${document.getElementById('figureCount').value} key figures per topic
+3. Build HTML/CSS interface with GitHub Copilot
+4. Implement filtering logic with JavaScript
+5. Deploy to GitHub Pages
+
+---
+Generated by Knowledge Library Builder
+`;
+
+            // Create download
+            const blob = new Blob([spec], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'knowledge-library-spec.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Add Enter key support for facet input
+        document.getElementById('facetInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addFacet();
+            }
+        });
+
+        // Pre-populate some example facets
+        facets = ['Data Availability', 'Topic Type', 'Time Period', 'Geographic Scope'];
+        renderFacets();
+    </script>
+</body>
+</html>
