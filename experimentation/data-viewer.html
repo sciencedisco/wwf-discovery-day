@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu of Indicators for the Amazon – November 2022</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #D94B8A;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FDF4F9;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 0.85rem;
+            color: #C4A8D4;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            background: rgba(253, 244, 249, 0.05);
+            backdrop-filter: blur(10px);
+            border-right: 2px solid rgba(196, 168, 212, 0.3);
+            color: white;
+            overflow-y: auto;
+            padding: 30px 20px;
+        }
+        
+        .sidebar h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #D94B8A;
+            color: #FDF4F9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-item {
+            padding: 12px 15px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            font-weight: 600;
+            color: #C4A8D4;
+            border: 2px solid transparent;
+        }
+        
+        .file-item:hover {
+            background: rgba(196, 168, 212, 0.2);
+            color: #FDF4F9;
+            transform: translateX(5px);
+        }
+        
+        .file-item.active {
+            background: #D94B8A;
+            color: #FDF4F9;
+            border-color: #D94B8A;
+            transform: translateX(5px);
+        }
+        
+        .content {
+            background: #FDF4F9;
+            overflow-y: auto;
+            padding: 40px;
+        }
+        
+        .metadata {
+            background: rgba(196, 168, 212, 0.1);
+            border: 2px solid #C4A8D4;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .metadata h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #D94B8A;
+            margin-bottom: 15px;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .metadata-item {
+            font-size: 0.9rem;
+        }
+        
+        .metadata-label {
+            font-weight: 800;
+            color: #5BBFBA;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .metadata-value {
+            color: #3D1A5C;
+            font-weight: 600;
+        }
+        
+        .markdown-content {
+            line-height: 1.6;
+        }
+        
+        .markdown-content h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #3D1A5C;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        
+        .markdown-content h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #D94B8A;
+        }
+
+        .markdown-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #5BBFBA;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 15px;
+        }
+        
+        .markdown-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .markdown-content strong {
+            color: #3D1A5C;
+            font-weight: 800;
+        }
+
+        .markdown-content a {
+            color: #5BBFBA;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .markdown-content a:hover {
+            color: #D94B8A;
+        }
+        
+        .navigation {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px solid #C4A8D4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            padding: 12px 30px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover:not(:disabled) {
+            background: #D94B8A;
+            transform: translateY(-2px);
+        }
+        
+        .nav-button:disabled {
+            background: #C4A8D4;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-counter {
+            font-weight: 800;
+            color: #3D1A5C;
+            font-size: 0.95rem;
+        }
+        
+        .error {
+            color: #D94B8A;
+            padding: 30px;
+            background: rgba(217, 75, 138, 0.1);
+            border: 2px solid #D94B8A;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #C4A8D4;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Menu of Indicators for the Amazon – November 2022</h1>
+            <div class="header-subtitle">WWF Provided Fact Sheet</div>
+        </div>
+        <a href="../documentation/data.html" class="back-btn">← Back to Data Sources</a>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Data Files</h2>
+            <ul class="file-list" id="fileList"></ul>
+        </div>
+        <div class="content" id="content">
+            <div class="loading">Select a file to view</div>
+        </div>
+    </div>
+
+    <script>
+        const files = [
+            '01-lpi-latin-america.md',
+            '02-lpi-global-forest.md',
+            '03-lpi-global-freshwater.md',
+            '04-river-dolphin-population.md',
+            '05-regional-threats-latin-america.md',
+            '06-boto-tucuxi-abundance-density.md',
+            '07-global-tree-assessment.md',
+            '08-national-red-list-index.md',
+            '09-global-threat-risk.md',
+            '10-endemic-plant-species-iucn.md',
+            '11-iucn-jaguar.md',
+            '12-iucn-boto.md',
+            '13-iucn-tucuxi.md',
+            '14-threatened-tree-species-richness.md',
+            '15-jaguar-range-iucn-2016.md',
+            '16-boto-range-da-silva-2018.md',
+            '17-boto-range-iucn-2018.md',
+            '18-tucuxi-range-flores-2018.md',
+            '19-tucuxi-range-iucn-2020.md',
+            '20-river-dolphin-population-distribution.md',
+            '21-biodiversity-intactness-index.md',
+            '22-land-use-cover-2009-2019.md',
+            '23-mapbiomas-amazonia.md',
+            '24-agriculture-livestock-2001-2018.md',
+            '25-forest-replaced-by-cattle-2001-2015.md',
+            '26-forest-replaced-by-soy-2001-2015.md',
+            '27-direct-indirect-soy-forest-loss-2019.md',
+            '28-agricultural-expansion-amazon.md',
+            '29-free-flowing-river-fragmentation.md',
+            '30-hydropower-expansion-impact.md',
+            '31-existing-proposed-dam-projects.md',
+            '32-freshwater-ecosystem-impacts.md',
+            '33-hydroelectric-vulnerability.md',
+            '34-environmental-impacts-dams.md',
+            '35-top-countries-primary-forest-loss-2021.md',
+            '36-global-drivers-tropical-deforestation.md',
+            '37-primary-forest-loss-brazil-bolivia-2000-2021.md',
+            '38-forest-area-change-1990-2016.md',
+            '39-drivers-deforestation-latin-america.md',
+            '40-deforestation-within-amazon.md',
+            '41-degradation-amazon-2020.md',
+            '42-deforestation-rates-brazil-amazon-2008-2021.md',
+            '43-deforestation-rates-amazon-vs-cerrado.md',
+            '44-primary-forest-loss-hotspots-2002-2021.md',
+            '45-deforestation-frontiers-brazil-2004-2015.md'
+        ];
+
+        let currentIndex = 0;
+
+        function parseMarkdown(text) {
+            // Parse frontmatter
+            const frontmatterMatch = text.match(/^---\n([\s\S]*?)\n---/);
+            let metadata = {};
+            let content = text;
+            
+            if (frontmatterMatch) {
+                const frontmatter = frontmatterMatch[1];
+                frontmatter.split('\n').forEach(line => {
+                    const match = line.match(/^([^:]+):\s*(.+)$/);
+                    if (match) {
+                        const key = match[1].trim();
+                        let value = match[2].trim();
+                        // Remove quotes if present
+                        if (value.startsWith('"') && value.endsWith('"')) {
+                            value = value.slice(1, -1);
+                        }
+                        metadata[key] = value;
+                    }
+                });
+                content = text.slice(frontmatterMatch[0].length).trim();
+            }
+
+            // Simple markdown parsing
+            content = content
+                // Headers
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Bold
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                // Images - media folder is inside the data folder
+                .replace(/!\[([^\]]*)\]\(media\/([^)]+)\)/g, '<img src="data/media/$2" alt="$1" />')
+                // Links
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+                // Paragraphs
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/^/, '<p>')
+                .replace(/$/, '</p>');
+
+            return { metadata, content };
+        }
+
+        function renderMetadata(metadata) {
+            return `
+                <div class="metadata">
+                    <h2>Metadata</h2>
+                    <div class="metadata-grid">
+                        ${Object.entries(metadata).map(([key, value]) => `
+                            <div class="metadata-item">
+                                <div class="metadata-label">${key.replace(/_/g, ' ')}</div>
+                                <div class="metadata-value">${value}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNavigation() {
+            return `
+                <div class="navigation">
+                    <button class="nav-button" onclick="loadPrevious()" ${currentIndex === 0 ? 'disabled' : ''}>
+                        ← Previous
+                    </button>
+                    <span class="nav-counter">
+                        ${currentIndex + 1} / ${files.length}
+                    </span>
+                    <button class="nav-button" onclick="loadNext()" ${currentIndex === files.length - 1 ? 'disabled' : ''}>
+                        Next →
+                    </button>
+                </div>
+            `;
+        }
+
+        async function loadFile(index) {
+            currentIndex = index;
+            const filename = files[index];
+            const contentDiv = document.getElementById('content');
+            
+            try {
+                contentDiv.innerHTML = '<div class="loading">Loading...</div>';
+                
+                const response = await fetch(`data/${filename}`);
+                if (!response.ok) throw new Error(`Failed to load ${filename}`);
+                
+                const text = await response.text();
+                const { metadata, content } = parseMarkdown(text);
+                
+                contentDiv.innerHTML = `
+                    ${renderMetadata(metadata)}
+                    <div class="markdown-content">
+                        ${content}
+                    </div>
+                    ${renderNavigation()}
+                `;
+                
+                // Update active state in sidebar
+                document.querySelectorAll('.file-item').forEach((item, i) => {
+                    item.classList.toggle('active', i === index);
+                });
+                
+                // Scroll to top
+                contentDiv.scrollTop = 0;
+                
+            } catch (error) {
+                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}</div>`;
+            }
+        }
+
+        function loadNext() {
+            if (currentIndex < files.length - 1) {
+                loadFile(currentIndex + 1);
+            }
+        }
+
+        function loadPrevious() {
+            if (currentIndex > 0) {
+                loadFile(currentIndex - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') loadNext();
+            if (e.key === 'ArrowLeft') loadPrevious();
+        });
+
+        // Initialize file list
+        const fileList = document.getElementById('fileList');
+        files.forEach((file, index) => {
+            const li = document.createElement('li');
+            li.className = 'file-item';
+            li.textContent = file;
+            li.onclick = () => loadFile(index);
+            fileList.appendChild(li);
+        });
+
+        // Load first file
+        loadFile(0);
+    </script>
+</body>
+</html>
