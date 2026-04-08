@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Guide - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+            margin: -40px -20px 40px -20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #C4A8D4;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 6px solid #D94B8A;
+            padding-left: 15px;
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #3D1A5C;
+            margin-bottom: 15px;
+        }
+
+        .checklist {
+            background: rgba(196, 168, 212, 0.1);
+            border-left: 4px solid #5BBFBA;
+            padding: 20px 20px 20px 50px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .checklist-title {
+            font-weight: 800;
+            color: #5BBFBA;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .checklist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        .checklist li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5BBFBA;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .prompt-box {
+            background: #3D1A5C;
+            color: #FDF4F9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 6px solid #D94B8A;
+        }
+
+        .prompt-box-title {
+            font-weight: 800;
+            color: #D94B8A;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .prompt-box p {
+            color: #FDF4F9;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .step-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: rgba(91, 191, 186, 0.1);
+            border: 2px solid #5BBFBA;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-box:hover {
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .step-box h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .step-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #3D1A5C;
+            margin: 0;
+        }
+
+        .highlight {
+            color: #D94B8A;
+            font-weight: 800;
+        }
+
+        .tip-box {
+            background: rgba(217, 75, 138, 0.1);
+            border-left: 4px solid #D94B8A;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .tip-box strong {
+            color: #D94B8A;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .tip-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        ul.simple-list {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        ul.simple-list li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-button">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="prework.html#github">GitHub Setup</a></li>
+                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-button active">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="research-questions.html">Research Questions</a></li>
+                        <li><a href="data.html">Get to Know Your Data</a></li>
+                        <li><a href="dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="analyse-guide.html">Analyse</a></li>
+                        <li><a href="build-guide.html">Build</a></li>
+                        <li><a href="showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-button">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="resources.html#cv">CV Tips</a></li>
+                        <li><a href="resources.html#interview">Interview Prep</a></li>
+                        <li><a href="resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content">
+    <div class="container">
+        <div class="page-header">
+            <h1>Build Guide</h1>
+            <a href="index.html" class="back-btn">← Back to Overview</a>
+        </div>
+
+        <div class="intro">
+            <p>Welcome to the build phase! This is where your dashboard comes to life. You'll use <span class="highlight">GitHub Copilot</span> to generate a single-page website that visualizes your data and tells a compelling story about conservation.</p>
+            <p>Don't worry if you're not a web developer—Copilot will be your coding partner. Your job is to guide it with clear instructions and iterate until you're proud of what you've built.</p>
+        </div>
+
+        <!-- Section: Before You Start -->
+        <div class="section">
+            <h2 class="section-title">Before You Start</h2>
+            <p>Make sure you have these three key assets ready. They're the foundation for building your dashboard:</p>
+            
+            <div class="checklist">
+                <div class="checklist-title">Your Build Assets</div>
+                <ul>
+                    <li><strong>CSV Files</strong> from your analysis phase (located in your <code>output/</code> folder)</li>
+                    <li><strong>Dashboard Spec</strong> (the <code>-spec.md</code> file you exported from the Dashboard Builder)</li>
+                    <li><strong>Technical Requirements</strong> (found in <code>TECHNICAL_REQUIREMENTS.md</code> in your repo)</li>
+                    <li><strong>Your Own Design Guidelines</strong> (create a simple markdown file with your team's color palette, fonts, and style preferences)</li>
+                </ul>
+            </div>
+
+            <p>These files tell Copilot <span class="highlight">what</span> to build (your spec), <span class="highlight">how</span> to build it (technical requirements), and <span class="highlight">how it should look</span> (your design guidelines).</p>
+            
+            <div class="tip-box">
+                <strong>Create Your Design Guidelines:</strong>
+                <p>Before you start coding, spend 10 minutes as a team to create a simple <code>DESIGN_GUIDELINES.md</code> file. Include: your color palette (3-5 colors with hex codes), font choices, and any style preferences (modern, playful, professional, etc.). This gives your dashboard a consistent, polished look and makes it easier to prompt Copilot.</p>
+            </div>
+        </div>
+
+        <!-- Section: Getting Started with Copilot -->
+        <div class="section">
+            <h2 class="section-title">Getting Started with Copilot</h2>
+            <p>Think of GitHub Copilot as your AI pair programmer. You describe what you want in natural language, and Copilot generates the code. Here's how to work with it effectively:</p>
+
+            <div class="step-grid">
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <h3>Open Chat</h3>
+                    <p>In VS Code, open Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I). This is where you'll have conversations with Copilot about your code.</p>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <h3>Reference Files</h3>
+                    <p>Use <code>#file</code> to reference your files. For example: <code>#file:dashboard-spec.md</code> or <code>#file:TECHNICAL_REQUIREMENTS.md</code></p>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <h3>Be Specific</h3>
+                    <p>The more detail you provide, the better. Instead of "make a chart," say "create a bar chart showing forest loss by region using data from forest-loss.csv"</p>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">4</div>
+                    <h3>Iterate</h3>
+                    <p>Don't expect perfection on the first try. Review what Copilot creates, then ask it to refine: "make the colors match our brand" or "add labels to the axes"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Your First Prompt -->
+        <div class="section">
+            <h2 class="section-title">Your First Prompt</h2>
+            <p>Here's a starter prompt to kick off your dashboard. Copy this into Copilot Chat and customize it with your specifics:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-box-title">Example Starter Prompt</div>
+                <p>
+                    "I need to create a single-page HTML dashboard for my WWF Discovery Day project. Please use #file:dashboard-spec.md as the product specification, #file:TECHNICAL_REQUIREMENTS.md for technical guidance, and #file:DESIGN_GUIDELINES.md for styling. 
+                    <br><br>
+                    The dashboard should have a header with the title '[Your Dashboard Title]', an introduction section, and a 3×3 grid of charts as specified in my dashboard spec. 
+                    <br><br>
+                    Use the CSV files in my output/ folder for the data. Start by creating the HTML structure with placeholder charts, and we'll add the real visualizations one by one."
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong>
+                <p>Start simple. Get the basic structure working first (header, intro, grid layout), then add charts one at a time. This makes debugging easier and gives you quick wins.</p>
+            </div>
+        </div>
+
+        <!-- Section: Building Your Charts -->
+        <div class="section">
+            <h2 class="section-title">Building Your Charts</h2>
+            <p>Once you have the basic structure, it's time to bring your data to life with visualizations. Here's how to work with Copilot to create each chart:</p>
+
+            <div class="checklist">
+                <div class="checklist-title">For Each Chart</div>
+                <ul>
+                    <li>Tell Copilot which CSV file to use</li>
+                    <li>Specify the chart type (bar, line, pie, etc.)</li>
+                    <li>Describe what data should be on each axis</li>
+                    <li>Ask for labels, legends, and tooltips</li>
+                    <li>Request your team's brand colors from your design guidelines</li>
+                </ul>
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-box-title">Example Chart Prompt</div>
+                <p>
+                    "Create a bar chart in the first grid cell using data from output/forest-loss.csv. Show forest loss in hectares by region. Use the primary color from my design guidelines for bars. Include a title 'Forest Loss by Region 2020-2024', labeled axes, and a legend."
+                </p>
+            </div>
+
+            <p>Copilot will likely use a charting library like Chart.js or Plotly. Don't worry about the technical details—just review the output and ask for changes if needed.</p>
+
+            <div class="tip-box">
+                <strong>Stuck?</strong>
+                <p>If a chart isn't working, ask Copilot: "The chart isn't displaying. Can you debug this?" or "The data isn't loading from the CSV. What's wrong?" Copilot can troubleshoot its own code!</p>
+            </div>
+        </div>
+
+        <!-- Section: Polish and Iterate -->
+        <div class="section">
+            <h2 class="section-title">Polish and Iterate</h2>
+            <p>Once your dashboard is functional, it's time to make it shine. Here are some ways to take it to the next level:</p>
+
+            <ul class="simple-list">
+                <li><strong>Add interactivity:</strong> "Make the charts interactive so users can hover to see exact values"</li>
+                <li><strong>Improve layout:</strong> "Add more spacing between the grid cells" or "Make the header image full-width"</li>
+                <li><strong>Enhance text:</strong> "Below each chart, add the summary text from my dashboard spec"</li>
+                <li><strong>Refine colors:</strong> "Use a gradient for the background matching the purple theme"</li>
+                <li><strong>Optimize mobile:</strong> "Make the grid single-column on mobile screens"</li>
+                <li><strong>Add animations:</strong> "Animate the charts when the page loads"</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Get Creative:</strong>
+                <p>This is your chance to experiment! Try asking Copilot for things like: "Add a dark mode toggle," "Create a scrolling reveal effect," or "Add icons next to section headers." The worst that can happen is it doesn't work—and you can always undo.</p>
+            </div>
+        </div>
+
+        <!-- Section: Preview Your Dashboard -->
+        <div class="section">
+            <h2 class="section-title">Preview Your Dashboard</h2>
+            <p>As you build, you'll want to see your changes in action. Here's how to preview your dashboard locally:</p>
+
+            <div class="checklist">
+                <div class="checklist-title">Preview Steps</div>
+                <ul>
+                    <li>Save your <code>index.html</code> file in VS Code</li>
+                    <li>Right-click on the file in the file explorer</li>
+                    <li>Select "Copy Path" to copy the full file path</li>
+                    <li>Open your web browser (Chrome, Firefox, Safari, etc.)</li>
+                    <li>Paste the file path into the address bar and press Enter</li>
+                    <li>Your dashboard will load locally in the browser</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>Refresh to See Changes:</strong>
+                <p>After making changes in VS Code, save the file and refresh your browser (Cmd+R or Ctrl+R) to see the updates. Keep both VS Code and your browser visible side-by-side for the fastest iteration.</p>
+            </div>
+        </div>
+
+        <!-- Section: Final Tips -->
+        <div class="section">
+            <h2 class="section-title">Final Tips</h2>
+            
+            <div class="tip-box">
+                <strong>Work as a Team:</strong>
+                <p>Divide and conquer! One person can work on the layout, another on charts, and another on polishing text. Use Copilot in parallel and merge your work.</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Ask Your Coach:</strong>
+                <p>Your coach is there to help! If you're stuck, show them what Copilot generated and ask for feedback. They can help you refine your prompts.</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Have Fun:</strong>
+                <p>This is your chance to build something real that highlights important conservation work. Be proud of what you create, learn from the process, and enjoy the magic of AI-assisted coding!</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="showcase-guide.html" style="display: inline-block; padding: 15px 40px; background: #D94B8A; color: #FDF4F9; text-decoration: none; border-radius: 30px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.background='#3D1A5C'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#D94B8A'; this.style.transform='translateY(0)';">Next: Deploy & Showcase →</a>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

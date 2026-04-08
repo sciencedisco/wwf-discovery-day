@@ -22,40 +22,144 @@
             padding: 40px 20px;
         }
 
-        .header {
+        /* Navigation Bar */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+            margin: -40px -20px 40px -20px;
+        }
+
+        .nav-container {
             max-width: 1400px;
-            margin: 0 auto 40px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
+        .nav-logo {
             font-weight: 800;
             font-size: 1.5rem;
             color: #FDF4F9;
         }
 
-        .logo::after {
+        .nav-logo::after {
             content: '🪩';
             margin-left: 5px;
         }
 
-        .nav-link {
-            color: #C4A8D4;
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: color 0.3s;
+            transition: all 0.2s ease;
         }
 
-        .nav-link:hover {
-            color: #D94B8A;
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
         }
 
         h1 {
-            max-width: 1400px;
-            margin: 0 auto 20px;
             font-size: 4rem;
             font-weight: 900;
             color: #D94B8A;
@@ -215,12 +319,46 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">SCIENCE</div>
-        <a href="index.html" class="nav-link">← Back to Overview</a>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-button">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="prework.html#github">GitHub Setup</a></li>
+                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-button active">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="research-questions.html">Research Questions</a></li>
+                        <li><a href="data.html">Get to Know Your Data</a></li>
+                        <li><a href="dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="analyse-guide.html">Analyse</a></li>
+                        <li><a href="build-guide.html">Build</a></li>
+                        <li><a href="showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-button">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="resources.html#cv">CV Tips</a></li>
+                        <li><a href="resources.html#interview">Interview Prep</a></li>
+                        <li><a href="resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content">
+    <div class="page-header">
+        <h1>Get to Know Your Data</h1>
+        <a href="index.html" class="back-btn">← Back to Overview</a>
     </div>
-
-    <h1>Get to Know Your Data</h1>
     <div class="subtitle">Explore the datasets available for your discovery journey. Click on a card to dive deeper.</div>
 
     <div class="filters">
@@ -401,5 +539,10 @@
             });
         });
     </script>
+
+    <div style="max-width: 1400px; margin: 40px auto; text-align: center; padding-bottom: 40px;">
+        <a href="dashboard-builder.html" style="display: inline-block; padding: 15px 40px; background: #D94B8A; color: #FDF4F9; text-decoration: none; border-radius: 30px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.background='#3D1A5C'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#D94B8A'; this.style.transform='translateY(0)';">Next: Design Your Dashboard →</a>
+    </div>
+    </div>
 </body>
 </html>

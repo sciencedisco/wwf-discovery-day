@@ -20,6 +20,108 @@
             color: #3D1A5C;
             line-height: 1.6;
             min-height: 100vh;
+            padding: 0;
+        }
+
+        .nav-bar {
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+            padding: 20px 0;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link-main {
+            display: block;
+            padding: 25px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link-main:hover, .nav-link-main.active {
+            background: rgba(217, 75, 138, 0.2);
+            border-bottom-color: #D94B8A;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #FDF4F9;
+            min-width: 250px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 15px 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 15px 25px;
+            color: #3D1A5C;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(217, 75, 138, 0.1);
+            border-left-color: #D94B8A;
+            padding-left: 30px;
+        }
+
+        .main-content {
             padding: 40px 20px;
         }
 
@@ -87,6 +189,22 @@
             text-transform: uppercase;
             margin-bottom: 15px;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
         }
 
         p {
@@ -162,6 +280,13 @@
 
             h2 {
                 font-size: 1.4rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .time-badge {
+                align-self: flex-start;
             }
 
             p {
@@ -179,6 +304,42 @@
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-link-main">Prework</a>
+                    <div class="dropdown">
+                        <a href="prework.html#github" class="dropdown-link">GitHub Setup</a>
+                        <a href="prework.html#vscode" class="dropdown-link">VS Code & Copilot</a>
+                        <a href="prework.html#python" class="dropdown-link">Python Setup</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link-main active">Discovery Day</a>
+                    <div class="dropdown">
+                        <a href="research-questions.html" class="dropdown-link">Research Questions</a>
+                        <a href="data.html" class="dropdown-link">Explore Data</a>
+                        <a href="dashboard-builder.html" class="dropdown-link">Design Dashboard</a>
+                        <a href="analyse-guide.html" class="dropdown-link">Analyse</a>
+                        <a href="build-guide.html" class="dropdown-link">Build</a>
+                        <a href="showcase-guide.html" class="dropdown-link">Showcase</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-link-main">Resources</a>
+                    <div class="dropdown">
+                        <a href="resources.html#cv" class="dropdown-link">Add to CV</a>
+                        <a href="resources.html#interviews" class="dropdown-link">Interview Tips</a>
+                        <a href="resources.html#learning" class="dropdown-link">Continued Learning</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
     <div class="logo">SCIENCE</div>
     
     <div class="container">
@@ -189,40 +350,69 @@
         <div class="agenda-section">
             <div class="agenda-item clickable">
                 <a href="research-questions.html">
-                    <h2>Welcome</h2>
+                    <h2>
+                        <span>Welcome</span>
+                        <span class="time-badge">20-30 min</span>
+                    </h2>
                     <p>We kick off the day, followed by a short presentation from WWF on the research question and why it matters to them.</p>
                 </a>
             </div>
 
             <div class="agenda-item clickable">
                 <a href="data.html">
-                    <h2>Get to Know Your Data</h2>
+                    <h2>
+                        <span>Get to Know Your Data</span>
+                        <span class="time-badge">30-45 min</span>
+                    </h2>
                     <p>Teams of four, each with a dedicated coach, start with an icebreaker that doubles as a data exploration exercise: which data field do you identify most with, and why?</p>
                 </a>
             </div>
 
             <div class="agenda-item clickable">
                 <a href="dashboard-builder.html">
-                    <h2>Design Your Product</h2>
+                    <h2>
+                        <span>Design Your Product</span>
+                        <span class="time-badge">45-60 min</span>
+                    </h2>
                     <p>Before touching any code, teams whiteboard what their final website should look like, using a catalog of chart types to shape their vision — maps, donut charts, heatmaps, interactive diagrams.</p>
                 </a>
             </div>
 
-            <div class="agenda-item">
-                <h2>Analyse</h2>
-                <p>Teams work through Jupyter notebooks, using GreenPT to qualitatively analyse the data and export their findings to CSV.</p>
+            <div class="agenda-item clickable">
+                <a href="analyse-guide.html">
+                    <h2>
+                        <span>Analyse</span>
+                        <span class="time-badge">90-120 min</span>
+                    </h2>
+                    <p>Teams work through Jupyter notebooks, using GreenPT to qualitatively analyse the data and export their findings to CSV.</p>
+                </a>
             </div>
 
-            <div class="agenda-item">
-                <h2>Build</h2>
-                <p>Using GitHub Copilot, teams generate a single-page website hosted on GitHub Pages, based on a technical requirements file we provide and the product brief they created during the design phase.</p>
+            <div class="agenda-item clickable">
+                <a href="build-guide.html">
+                    <h2>
+                        <span>Build</span>
+                        <span class="time-badge">120-180 min</span>
+                    </h2>
+                    <p>Using GitHub Copilot, teams generate a single-page website hosted on GitHub Pages, based on a technical requirements file we provide and the product brief they created during the design phase.</p>
+                </a>
             </div>
 
-            <div class="agenda-item">
-                <h2>Showcase and Borrel</h2>
-                <p>Teams present their live websites on the big screen, then we celebrate with a borrel where everyone can walk around and explore each other's work.</p>
+            <div class="agenda-item clickable">
+                <a href="showcase-guide.html">
+                    <h2>
+                        <span>Showcase and Borrel</span>
+                        <span class="time-badge">60+ min</span>
+                    </h2>
+                    <p>Teams present their live websites on the big screen, then we celebrate with a borrel where everyone can walk around and explore each other's work.</p>
+                </a>
             </div>
         </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="research-questions.html" style="display: inline-block; padding: 15px 40px; background: #D94B8A; color: #FDF4F9; text-decoration: none; border-radius: 30px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.background='#3D1A5C'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#D94B8A'; this.style.transform='translateY(0)';">Next: Research Questions →</a>
+        </div>
+    </div>
     </div>
 </body>
 </html>

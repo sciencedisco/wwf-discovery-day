@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Guide - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+            margin: -40px -20px 40px -20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #C4A8D4;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-card {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #5BBFBA;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #D94B8A;
+            color: #FDF4F9;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #3D1A5C;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #3D1A5C;
+            color: #FDF4F9;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .code-block code {
+            display: block;
+        }
+
+        .tip-box {
+            background: rgba(91, 191, 186, 0.1);
+            border-left: 4px solid #5BBFBA;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .tip-box strong {
+            color: #5BBFBA;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .tip-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        .highlight {
+            color: #D94B8A;
+            font-weight: 800;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .step-card {
+                padding: 25px;
+            }
+
+            .step-title {
+                font-size: 1.3rem;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-button">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="prework.html#github">GitHub Setup</a></li>
+                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-button active">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="research-questions.html">Research Questions</a></li>
+                        <li><a href="data.html">Get to Know Your Data</a></li>
+                        <li><a href="dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="analyse-guide.html">Analyse</a></li>
+                        <li><a href="build-guide.html">Build</a></li>
+                        <li><a href="showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-button">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="resources.html#cv">CV Tips</a></li>
+                        <li><a href="resources.html#interview">Interview Prep</a></li>
+                        <li><a href="resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content">
+    <div class="container">
+        <div class="page-header">
+            <h1>Analysis Guide</h1>
+            <a href="index.html" class="back-btn">← Back to Overview</a>
+        </div>
+
+        <div class="intro">
+            <p>This guide walks you through analyzing data using Jupyter notebooks. Don't worry if you're new to coding—we'll take it step by step. By the end, you'll have clean data ready to visualize on your dashboard.</p>
+        </div>
+
+        <div class="step-container">
+            <!-- Step 0: Clone the Repo -->
+            <div class="step-card">
+                <div class="step-number">0</div>
+                <h2 class="step-title">Clone the Repository</h2>
+                <p class="step-description">
+                    Before you can start analyzing, you need to <span class="highlight">clone the project repository</span> to your computer. This gives you access to the starter Jupyter notebook and any sample data.
+                </p>
+                <div class="code-block">
+                    <code># In your terminal, navigate to where you want to work, then run:</code>
+                    <code>git clone [repository-url]</code>
+                    <code>cd wwf-discovery-day</code>
+                </div>
+                <div class="tip-box">
+                    <strong>Coach Tip:</strong>
+                    <p>Your coach will share the exact repository URL. If you're using VS Code, you can also clone by clicking "Clone Git Repository" from the welcome screen.</p>
+                </div>
+            </div>
+
+            <!-- Step 1: What is a Jupyter Notebook? -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Understanding Jupyter Notebooks</h2>
+                <p class="step-description">
+                    A <span class="highlight">Jupyter notebook</span> is like a digital lab notebook where you can write notes, run code, and see results—all in one place. Think of it as a document that combines:
+                </p>
+                <ul>
+                    <li><strong>Text cells (Markdown)</strong> - for explanations and notes</li>
+                    <li><strong>Code cells (Python)</strong> - for running data analysis</li>
+                    <li><strong>Output cells</strong> - for viewing results, charts, and tables</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Getting Started:</strong>
+                    <p>Open VS Code, navigate to your cloned folder, and open the <code>.ipynb</code> file. VS Code will show you a notebook interface where you can run each cell by clicking the play button or pressing Shift+Enter.</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Import Data -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Import Your Data</h2>
+                <p class="step-description">
+                    First, you need to load your data into Python. We'll use <span class="highlight">pandas</span>, a library that makes working with data easy. It's like opening an Excel file, but with code.
+                </p>
+                <div class="code-block">
+                    <code># Import the pandas library</code>
+                    <code>import pandas as pd</code>
+                    <code></code>
+                    <code># Load your data from a CSV file</code>
+                    <code>df = pd.read_csv('data/your-dataset.csv')</code>
+                    <code></code>
+                    <code># Take a quick look at the first few rows</code>
+                    <code>df.head()</code>
+                </div>
+                <div class="tip-box">
+                    <strong>What's happening?</strong>
+                    <p><code>pd.read_csv()</code> reads your CSV file and stores it in a variable called <code>df</code> (short for "dataframe"). The <code>.head()</code> command shows you the first 5 rows so you can see what your data looks like.</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Clean Your Data -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Clean Your Data</h2>
+                <p class="step-description">
+                    Real-world data is messy. You might find missing values, duplicates, or inconsistent formatting. Here are some common cleaning steps:
+                </p>
+                <div class="code-block">
+                    <code># Check for missing values</code>
+                    <code>df.info()</code>
+                    <code></code>
+                    <code># Remove rows with missing data</code>
+                    <code>df = df.dropna()</code>
+                    <code></code>
+                    <code># Remove duplicate rows</code>
+                    <code>df = df.drop_duplicates()</code>
+                    <code></code>
+                    <code># Rename columns to make them clearer</code>
+                    <code>df = df.rename(columns={'old_name': 'new_name'})</code>
+                </div>
+                <div class="tip-box">
+                    <strong>Don't Overthink It:</strong>
+                    <p>You don't need to clean everything perfectly. Focus on what matters for your dashboard. Missing a few data points? That's okay—just document it in your dashboard notes.</p>
+                </div>
+            </div>
+
+            <!-- Step 4: Analyze with Python -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h2 class="step-title">Analyze with Python</h2>
+                <p class="step-description">
+                    Now for the fun part—finding insights! Here are some simple analysis techniques:
+                </p>
+                <div class="code-block">
+                    <code># Get summary statistics</code>
+                    <code>df.describe()</code>
+                    <code></code>
+                    <code># Count values in a column</code>
+                    <code>df['column_name'].value_counts()</code>
+                    <code></code>
+                    <code># Calculate the average</code>
+                    <code>df['column_name'].mean()</code>
+                    <code></code>
+                    <code># Group data and calculate totals</code>
+                    <code>df.groupby('category')['value'].sum()</code>
+                </div>
+                <div class="tip-box">
+                    <strong>Ask Questions:</strong>
+                    <p>What are you curious about? Which region has the highest biodiversity? How has deforestation changed over time? Let your research questions guide your analysis.</p>
+                </div>
+            </div>
+
+            <!-- Step 5: Analyze with GreenPT -->
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h2 class="step-title">Analyze with GreenPT (Optional)</h2>
+                <p class="step-description">
+                    <span class="highlight">GreenPT</span> is an AI tool that can help you analyze text data qualitatively—like identifying themes in survey responses or extracting key information from documents.
+                </p>
+                <div class="code-block">
+                    <code># Set up your API key (ask your coach for this)</code>
+                    <code>import openai</code>
+                    <code>openai.api_key = 'your-api-key-here'</code>
+                    <code></code>
+                    <code># Example: Ask GreenPT to summarize text</code>
+                    <code>response = openai.ChatCompletion.create(</code>
+                    <code>    model="gpt-4",</code>
+                    <code>    messages=[{"role": "user", "content": "Summarize this: ..."}]</code>
+                    <code>)</code>
+                    <code>print(response.choices[0].message.content)</code>
+                </div>
+                <div class="tip-box">
+                    <strong>When to Use GreenPT:</strong>
+                    <p>Use GreenPT when you have text data (like reports or survey responses) and need help categorizing, summarizing, or extracting insights. It's like having an AI research assistant.</p>
+                </div>
+            </div>
+
+            <!-- Step 6: Save to CSV -->
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <h2 class="step-title">Save Your Results to CSV</h2>
+                <p class="step-description">
+                    Once you've cleaned and analyzed your data, save it as a <span class="highlight">CSV file</span>. This file will be used to create visualizations on your dashboard.
+                </p>
+                <div class="code-block">
+                    <code># Save your cleaned/analyzed data</code>
+                    <code>df.to_csv('output/cleaned-data.csv', index=False)</code>
+                    <code></code>
+                    <code># Save a specific analysis result</code>
+                    <code>summary_df = df.groupby('region')['biodiversity_score'].mean()</code>
+                    <code>summary_df.to_csv('output/region-summary.csv')</code>
+                </div>
+                <div class="tip-box">
+                    <strong>Organize Your Outputs:</strong>
+                    <p>Create an <code>output</code> folder to keep your CSV files organized. Give them descriptive names like <code>forest-loss-2020-2024.csv</code> so you remember what each file contains.</p>
+                </div>
+            </div>
+
+            <!-- Step 7: Next Steps -->
+            <div class="step-card">
+                <div class="step-number">7</div>
+                <h2 class="step-title">Ready to Build!</h2>
+                <p class="step-description">
+                    Congratulations! You now have clean, analyzed data saved as CSV files. You're ready to move on to the <span class="highlight">Build</span> phase, where you'll use GitHub Copilot to create your dashboard website.
+                </p>
+                <div class="tip-box">
+                    <strong>Remember:</strong>
+                    <p>Your CSV files are the bridge between analysis and visualization. Make sure they're well-organized and documented. When you start building your dashboard, you'll reference these files to create charts and display key figures.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="build-guide.html" style="display: inline-block; padding: 15px 40px; background: #D94B8A; color: #FDF4F9; text-decoration: none; border-radius: 30px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.background='#3D1A5C'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#D94B8A'; this.style.transform='translateY(0)';">Next: Build Your Dashboard →</a>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

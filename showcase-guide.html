@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase Guide - Discovery Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
+            color: #3D1A5C;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+            margin: -40px -20px 40px -20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C4A8D4;
+            color: #FDF4F9;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #5BBFBA;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #D94B8A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #C4A8D4;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #3D1A5C;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 6px solid #D94B8A;
+            padding-left: 15px;
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #3D1A5C;
+            margin-bottom: 15px;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding: 20px 20px 20px 70px;
+            margin-bottom: 15px;
+            background: rgba(91, 191, 186, 0.05);
+            border-left: 4px solid #5BBFBA;
+            border-radius: 8px;
+            line-height: 1.7;
+        }
+
+        .step-list li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: #5BBFBA;
+            color: #FDF4F9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .code-inline {
+            background: rgba(61, 26, 92, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #3D1A5C;
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: #D94B8A;
+            font-weight: 800;
+        }
+
+        .tip-box {
+            background: rgba(217, 75, 138, 0.1);
+            border-left: 4px solid #D94B8A;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .tip-box strong {
+            color: #D94B8A;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .tip-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        .info-box {
+            background: rgba(196, 168, 212, 0.1);
+            border-left: 4px solid #C4A8D4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box strong {
+            color: #C4A8D4;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .info-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        .success-box {
+            background: rgba(91, 191, 186, 0.1);
+            border-left: 4px solid #5BBFBA;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success-box strong {
+            color: #5BBFBA;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .success-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3D1A5C;
+        }
+
+        ul.simple-list {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        ul.simple-list li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+
+            .step-list li {
+                padding-left: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="prework.html" class="nav-button">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="prework.html#github">GitHub Setup</a></li>
+                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-button active">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="research-questions.html">Research Questions</a></li>
+                        <li><a href="data.html">Get to Know Your Data</a></li>
+                        <li><a href="dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="analyse-guide.html">Analyse</a></li>
+                        <li><a href="build-guide.html">Build</a></li>
+                        <li><a href="showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-button">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="resources.html#cv">CV Tips</a></li>
+                        <li><a href="resources.html#interview">Interview Prep</a></li>
+                        <li><a href="resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content">
+    <div class="container">
+        <div class="page-header">
+            <h1>Showcase Guide</h1>
+            <a href="index.html" class="back-btn">← Back to Overview</a>
+        </div>
+
+        <div class="intro">
+            <p>You've built something amazing—now it's time to share it with the world! This guide will walk you through deploying your dashboard to <span class="highlight">GitHub Pages</span> so everyone can access it via a live URL.</p>
+            <p>Once deployed, you'll present your work to the group and celebrate your achievements together.</p>
+        </div>
+
+        <!-- Section: Deploy to GitHub Pages -->
+        <div class="section">
+            <h2 class="section-title">Deploy to GitHub Pages</h2>
+            <p>GitHub Pages is a free hosting service that turns your repository into a live website. Follow these steps carefully to enable it for your project:</p>
+
+            <ol class="step-list">
+                <li>Make sure your main HTML file is saved as <span class="code-inline">index.html</span> in the root of your repository (not in a subfolder).</li>
+                
+                <li>Commit all your changes in VS Code:
+                    <ul class="simple-list">
+                        <li>Open the Source Control panel (Ctrl+Shift+G or Cmd+Shift+G)</li>
+                        <li>Stage all changes by clicking the + button</li>
+                        <li>Write a commit message like "Add final dashboard"</li>
+                        <li>Click the checkmark to commit</li>
+                    </ul>
+                </li>
+                
+                <li>Push your changes to GitHub:
+                    <ul class="simple-list">
+                        <li>Click "Sync Changes" or "Push" in the Source Control panel</li>
+                        <li>This uploads your code to GitHub</li>
+                    </ul>
+                </li>
+                
+                <li>Go to your repository on GitHub.com in your web browser (the URL will look like <span class="code-inline">github.com/[username]/[repo-name]</span>).</li>
+                
+                <li>Click on the <span class="highlight">Settings</span> tab at the top of the repository page (it's the gear icon on the far right).</li>
+                
+                <li>In the left sidebar, scroll down and click on <span class="highlight">Pages</span> (under the "Code and automation" section).</li>
+                
+                <li>Under "Build and deployment", you'll see a section called <span class="highlight">Source</span>. Click the dropdown that says "None" and select <span class="highlight">Deploy from a branch</span>.</li>
+                
+                <li>Two new dropdowns will appear. Set them as follows:
+                    <ul class="simple-list">
+                        <li>Branch: Select <span class="code-inline">main</span> (or <span class="code-inline">master</span> if that's your default branch)</li>
+                        <li>Folder: Select <span class="code-inline">/ (root)</span></li>
+                    </ul>
+                </li>
+                
+                <li>Click the <span class="highlight">Save</span> button.</li>
+                
+                <li>Wait 1-2 minutes for GitHub to build and deploy your site. The page will refresh automatically.</li>
+                
+                <li>Once complete, a box at the top will show your live site URL: <span class="code-inline">https://[username].github.io/[repo-name]/</span></li>
+                
+                <li>Click the "Visit site" button or copy the URL to test it in your browser!</li>
+            </ol>
+
+            <div class="success-box">
+                <strong>Success!</strong>
+                <p>Your dashboard is now live on the internet! Anyone with the URL can visit it. Share this link with your team, coaches, and fellow participants.</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Making Updates:</strong>
+                <p>If you make changes to your dashboard after deployment, just commit and push them to GitHub again. GitHub Pages will automatically rebuild and update your live site within a few minutes.</p>
+            </div>
+        </div>
+
+        <!-- Section: Troubleshooting -->
+        <div class="section">
+            <h2 class="section-title">Troubleshooting</h2>
+            <p>If your site isn't showing up or looks broken, try these fixes:</p>
+
+            <div class="info-box">
+                <strong>404 Error (Page Not Found):</strong>
+                <p>Make sure your file is named exactly <span class="code-inline">index.html</span> (all lowercase) and is in the root folder, not in a subfolder. Check that you committed and pushed your changes to GitHub.</p>
+            </div>
+
+            <div class="info-box">
+                <strong>Charts or Data Not Loading:</strong>
+                <p>If your charts work locally but not on GitHub Pages, check that your CSV file paths are correct. They should be relative paths like <span class="code-inline">output/data.csv</span>, not absolute paths like <span class="code-inline">C:/Users/.../data.csv</span>.</p>
+            </div>
+
+            <div class="info-box">
+                <strong>Site Still Shows Old Version:</strong>
+                <p>Try a hard refresh in your browser (Ctrl+Shift+R or Cmd+Shift+R) to clear the cache. Sometimes browsers keep old versions temporarily.</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>Still Stuck?</strong>
+                <p>Ask your coach for help! They can check your repository settings and help debug any issues. You can also ask Copilot: "My GitHub Pages site isn't working. What should I check?"</p>
+            </div>
+        </div>
+
+        <!-- Section: Presenting Your Dashboard -->
+        <div class="section">
+            <h2 class="section-title">Presenting Your Dashboard</h2>
+            <p>Now comes the exciting part—sharing your work with everyone! Here's how to prepare for your presentation:</p>
+
+            <ul class="simple-list">
+                <li><strong>Test your live site:</strong> Load it on a few different devices (laptop, phone, tablet) to make sure everything works</li>
+                <li><strong>Prepare talking points:</strong> What story does your data tell? What insights did you discover?</li>
+                <li><strong>Highlight the journey:</strong> Share interesting challenges you overcame or creative solutions you tried</li>
+                <li><strong>Show your data sources:</strong> Explain where the data came from and why it matters</li>
+                <li><strong>Practice together:</strong> Decide who will present what so everyone on your team gets to share</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Presentation Tips:</strong>
+                <p>Keep it concise (3-5 minutes). Show, don't just tell—actually interact with your dashboard during the presentation. Click on charts, scroll through sections, and demonstrate any interactive features you built.</p>
+            </div>
+        </div>
+
+        <!-- Section: Celebrate -->
+        <div class="section">
+            <h2 class="section-title">Celebrate Your Achievement!</h2>
+            <p>You did it! You've gone from raw data to a live, interactive dashboard that tells a meaningful conservation story. That's no small feat, especially if this was your first time coding or working with data visualization.</p>
+
+            <p>During the borrel, take time to explore what other teams created. See what different approaches people took, what chart types they chose, and how they told their stories. You might discover new ideas for future projects!</p>
+
+            <div class="success-box">
+                <strong>What You've Learned:</strong>
+                <p>Working with data, designing user experiences, coding with AI assistance, collaborating in teams, and deploying to the web—these are valuable skills you can apply to future projects. Be proud of what you've accomplished today!</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
