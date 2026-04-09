@@ -301,6 +301,16 @@
     </div>
 
     <script>
+        // Calculate base path for GitHub Pages compatibility
+        const getBasePath = () => {
+            const path = window.location.pathname;
+            const htmlFile = 'data-viewer.html';
+            const basePath = path.substring(0, path.lastIndexOf(htmlFile));
+            return basePath;
+        };
+
+        const basePath = getBasePath();
+        
         const files = [
             '01-lpi-latin-america.md',
             '02-lpi-global-forest.md',
@@ -382,8 +392,8 @@
                 .replace(/^# (.*$)/gim, '<h1>$1</h1>')
                 // Bold
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                // Images - media folder is inside the data folder
-                .replace(/!\[([^\]]*)\]\(media\/([^)]+)\)/g, '<img src="data/media/$2" alt="$1" />')
+                // Images - media folder is inside the data folder, use base path
+                .replace(/!\[([^\]]*)\]\(media\/([^)]+)\)/g, `<img src="${basePath}data/media/$2" alt="$1" />`)
                 // Links
                 .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
                 // Paragraphs
@@ -434,8 +444,11 @@
             try {
                 contentDiv.innerHTML = '<div class="loading">Loading...</div>';
                 
-                const response = await fetch(`data/${filename}`);
-                if (!response.ok) throw new Error(`Failed to load ${filename}`);
+                // Use base path for GitHub Pages compatibility
+                const response = await fetch(`${basePath}data/${filename}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
                 
                 const text = await response.text();
                 const { metadata, content } = parseMarkdown(text);
@@ -457,7 +470,7 @@
                 contentDiv.scrollTop = 0;
                 
             } catch (error) {
-                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}</div>`;
+                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}<br><br>Path attempted: ${basePath}data/${filename}</div>`;
             }
         }
 
