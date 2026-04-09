@@ -176,7 +176,6 @@
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 40px;
-            border: 2px solid #D94B8A;
         }
 
         .intro p {
@@ -206,9 +205,24 @@
             font-weight: 800;
             color: #3D1A5C;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #D94B8A;
             padding-bottom: 10px;
+        }
+
+        .hint-text {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 5px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: #C4A8D4;
+            margin: 25px 0;
         }
 
         .facet-group {
@@ -452,42 +466,87 @@
         </div>
 
         <div class="intro">
-            <p>Design your interactive knowledge library structure. Define the categories users can browse, the facets they can filter by, and how each knowledge item is structured. This tool helps you plan before you build!</p>
+            <p>Design your interactive knowledge library structure. Define search terms, filters, facets, display fields, and how each knowledge item is structured. This helps you plan the complete search and discovery experience before you build!</p>
         </div>
 
         <div class="builder-layout">
-            <!-- Left Sidebar: Facets/Filters -->
+            <!-- Left Sidebar: Search & Filters -->
             <div class="facets-section">
-                <h3>Filter Facets</h3>
+                <h3>Static Filters</h3>
+                <p class="hint-text">Filters that are ALWAYS visible regardless of search term. Examples: "Data Type", "Time Period", "Published Year"</p>
                 
                 <div class="facet-group">
-                    <label>Add Filter Category:</label>
-                    <input type="text" id="facetInput" placeholder="e.g., Data Type">
+                    <label>Add Filter Option:</label>
+                    <input type="text" id="filterInput" placeholder="e.g., Research Papers">
+                </div>
+                
+                <button class="add-facet-btn" onclick="addFilter()">+ Add Filter</button>
+                
+                <div id="filtersList" style="margin-top: 15px;">
+                    <!-- Filters will be added here -->
+                </div>
+
+                <div class="section-divider"></div>
+
+                <h3>Dynamic Facets</h3>
+                <p class="hint-text">Context-dependent filters shown only when relevant to the selected search key term. Example: "Conservation Status" facet only appears when searching "Jaguar" or "River Dolphins".</p>
+                
+                <div class="facet-group">
+                    <label>Add Facet Field:</label>
+                    <input type="text" id="facetInput" placeholder="e.g., conservationStatus, habitat">
                 </div>
                 
                 <button class="add-facet-btn" onclick="addFacet()">+ Add Facet</button>
                 
-                <div id="facetsList" style="margin-top: 20px;">
+                <div id="facetsList" style="margin-top: 15px;">
                     <!-- Facets will be added here -->
                 </div>
             </div>
 
             <!-- Main Content Area -->
             <div class="main-content-area">
-                <div class="section-title">Main Categories</div>
-                <p style="margin-bottom: 20px; color: #666;">Define 6-8 main browseable categories for your knowledge library:</p>
+                <div class="section-title">Key Terms</div>
+                <p style="margin-bottom: 15px; color: #666;">Define the predefined search queries users can select from the search bar. <strong>Note: Free-format text search is outside the scope of this exercise.</strong> Users will only be able to select from these predetermined key terms.</p>
+                <p class="hint-text" style="margin-bottom: 20px;">Examples: "Jaguar Population", "Deforestation Trends", "River Dolphin Conservation", "Indigenous Communities"</p>
                 
-                <div class="categories-grid" id="categoriesGrid">
-                    <input type="text" class="category-input" placeholder="Category 1" id="cat1">
-                    <input type="text" class="category-input" placeholder="Category 2" id="cat2">
-                    <input type="text" class="category-input" placeholder="Category 3" id="cat3">
-                    <input type="text" class="category-input" placeholder="Category 4" id="cat4">
-                    <input type="text" class="category-input" placeholder="Category 5" id="cat5">
-                    <input type="text" class="category-input" placeholder="Category 6" id="cat6">
+                <div class="facet-group" style="max-width: 500px; margin-bottom: 15px;">
+                    <label>Add Key Term:</label>
+                    <input type="text" id="searchTermInput" placeholder="e.g., Jaguar Population" style="width: 100%; padding: 12px; border: 2px solid #C4A8D4; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem;">
+                </div>
+                
+                <button class="add-facet-btn" onclick="addSearchTerm()" style="max-width: 500px; margin-bottom: 20px;">+ Add Key Term</button>
+                
+                <div id="searchTermsList" style="margin-bottom: 30px;">
+                    <!-- Key terms will be added here -->
                 </div>
 
-                <div class="section-title" style="margin-top: 40px;">Knowledge Item Structure</div>
-                <p style="margin-bottom: 20px; color: #666;">Define what information each knowledge item should contain:</p>
+                <div class="section-title">Search Result Display</div>
+                <p style="margin-bottom: 15px; color: #666;">Which fields to show in search result preview cards (before clicking):</p>
+                
+                <div class="content-structure">
+                    <h4>Preview Card Fields</h4>
+                    <p class="hint-text">These appear in the search results grid. Keep it concise - users click for more details.</p>
+                    
+                    <div class="structure-item">
+                        <label style="min-width: 180px; font-weight: 600;">Primary Field:</label>
+                        <input type="text" id="resultField1" placeholder="e.g., title" value="title">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 180px; font-weight: 600;">Secondary Field:</label>
+                        <input type="text" id="resultField2" placeholder="e.g., summary" value="summary">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 180px; font-weight: 600;">Third Field:</label>
+                        <input type="text" id="resultField3" placeholder="e.g., keyFigure">
+                    </div>
+                    <div class="structure-item">
+                        <label style="min-width: 180px; font-weight: 600;">Metadata/Tags:</label>
+                        <input type="text" id="resultField4" placeholder="e.g., category, region, year">
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 40px;">Full Item Details (Detail Page)</div>
+                <p style="margin-bottom: 20px; color: #666;">Define the complete data structure shown when a user clicks on a search result to view the full item:</p>
 
                 <div class="content-structure">
                     <h4>Basic Information</h4>
@@ -555,7 +614,7 @@
         </div>
 
         <div class="export-section">
-            <button class="export-btn" onclick="exportLibrarySpec()">📥 Export Library Specification</button>
+            <button class="export-btn" onclick="exportLibrarySpec()">Export Library Specification</button>
             <p>Downloads a markdown file with your knowledge library structure to guide your build with GitHub Copilot</p>
         </div>
 
@@ -566,8 +625,65 @@
     </div>
 
     <script>
+        let searchTerms = [];
+        let filters = [];
         let facets = [];
 
+        // Search Terms
+        function addSearchTerm() {
+            const input = document.getElementById('searchTermInput');
+            const term = input.value.trim();
+            
+            if (term) {
+                searchTerms.push(term);
+                renderSearchTerms();
+                input.value = '';
+            }
+        }
+
+        function removeSearchTerm(index) {
+            searchTerms.splice(index, 1);
+            renderSearchTerms();
+        }
+
+        function renderSearchTerms() {
+            const container = document.getElementById('searchTermsList');
+            container.innerHTML = searchTerms.map((term, index) => `
+                <div class="facet-chip">
+                    ${term}
+                    <button onclick="removeSearchTerm(${index})" title="Remove">×</button>
+                </div>
+            `).join('');
+        }
+
+        // Static Filters
+        function addFilter() {
+            const input = document.getElementById('filterInput');
+            const filterName = input.value.trim();
+            
+            if (filterName) {
+                filters.push(filterName);
+                renderFilters();
+                input.value = '';
+            }
+        }
+
+        function removeFilter(index) {
+            filters.splice(index, 1);
+            renderFilters();
+        }
+
+        function renderFilters() {
+            const container = document.getElementById('filtersList');
+            container.innerHTML = filters.map((filter, index) => `
+                <div class="facet-chip">
+                    ${filter}
+                    <button onclick="removeFilter(${index})" title="Remove">×</button>
+                </div>
+            `).join('');
+        }
+
+        // Dynamic Facets
         function addFacet() {
             const input = document.getElementById('facetInput');
             const facetName = input.value.trim();
@@ -595,29 +711,32 @@
         }
 
         function exportLibrarySpec() {
-            // Gather all inputs
-            const categories = [];
-            for (let i = 1; i <= 6; i++) {
-                const val = document.getElementById(`cat${i}`).value.trim();
-                if (val) categories.push(val);
-            }
-
             const spec = `# Knowledge Library Specification
 
 ## Project Overview
 This knowledge library provides an interactive, filterable interface for exploring conservation data.
 
+**Important**: Free-format text search is outside the scope of this exercise. Users can only select from predefined key terms via the search bar.
+
 ## Region
 ${window.location.search.includes('amazon') ? 'Amazon' : window.location.search.includes('congo') ? 'Congo Basin / TRIDOM' : '[Your Region]'}
 
-## Main Categories (${categories.length})
-${categories.map((cat, i) => `${i + 1}. **${cat}**`).join('\n')}
+## Key Terms (${searchTerms.length})
+Predefined search queries users can select from the search bar:
+${searchTerms.length > 0 ? searchTerms.map((t, i) => `${i + 1}. ${t}`).join('\n') : '- [No key terms defined]'}
 
-## Filter Facets (${facets.length})
-Left sidebar filters that users can apply:
-${facets.map((f, i) => `${i + 1}. ${f}`).join('\n')}
+## Search Configuration
 
-## Knowledge Item Structure
+### Static Filters (${filters.length})
+Always visible, regardless of search context:
+${filters.length > 0 ? filters.map((f, i) => `${i + 1}. ${f}`).join('\n') : '- [No static filters defined]'}
+
+### Dynamic Facets (${facets.length})
+Context-dependent - shown only when relevant to the selected search key term:
+${facets.length > 0 ? facets.map((f, i) => `${i + 1}. ${f} - appears based on search term context`).join('\n') : '- [No facets defined]'}
+
+## Full Item Details (Detail Page)
+Complete data structure shown when user clicks on a search result:
 
 ### Basic Information
 - **Title**: ${document.getElementById('field1').value || 'Short descriptive title'}
@@ -649,23 +768,33 @@ ${facets.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 └──────────┴──────────────────────────────┘
 \`\`\`
 
+## Search Result Display
+Fields shown in search result preview cards:
+1. **${document.getElementById('resultField1').value || 'title'}** (Primary)
+2. **${document.getElementById('resultField2').value || 'summary'}** (Secondary)
+3. **${document.getElementById('resultField3').value || '[Not specified]'}** (Tertiary)
+4. **${document.getElementById('resultField4').value || '[Not specified]'}** (Metadata/Tags)
+
 ## Technical Requirements
 
 ### Search Functionality
-- Autocomplete dropdown showing matching categories/topics
-- Predetermined search terms only (no free-text)
-- Quick filtering as user types
+- Search bar with dropdown/autocomplete showing ${searchTerms.length} predefined key terms
+- **No free-format text search** - users can only select from predefined options
+- Type-ahead filtering to find key terms quickly
+- Select a key term to execute search and load relevant results
+- Clear search button to reset
 
 ### Filtering System
-- Left sidebar with ${facets.length} facet groups
-- Checkboxes or toggles for each filter option
+- **Static Filters**: ${filters.length} filters always visible (e.g., Data Type, Time Period)
+- **Dynamic Facets**: ${facets.length} context-dependent filters (shown based on selected search term)
 - Multiple filters can be active simultaneously
 - Clear visual feedback for active filters
+- "Clear all filters" option
 
 ### Knowledge Item Display
 - Grid or list view of filtered items
-- Each item shows: title, summary, key figure(s)
-- Click item to view full details
+- Search result cards show: ${document.getElementById('resultField1').value || 'title'}, ${document.getElementById('resultField2').value || 'summary'}, ${document.getElementById('resultField3').value || 'key figure'}
+- Click card to view full item details (all fields)
 - Visual indicator for missing/incomplete data
 
 ### Data Management
@@ -694,15 +823,33 @@ Generated by Knowledge Library Builder
             URL.revokeObjectURL(url);
         }
 
-        // Add Enter key support for facet input
+        // Add Enter key support for all inputs
+        document.getElementById('searchTermInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addSearchTerm();
+            }
+        });
+
+        document.getElementById('filterInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addFilter();
+            }
+        });
+
         document.getElementById('facetInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addFacet();
             }
         });
 
-        // Pre-populate some example facets
-        facets = ['Data Availability', 'Topic Type', 'Time Period', 'Geographic Scope'];
+        // Pre-populate some examples
+        searchTerms = ['Jaguar Conservation', 'Deforestation', 'River Dolphins', 'Indigenous Communities'];
+        renderSearchTerms();
+        
+        filters = ['Data Type', 'Time Period', 'Source Type'];
+        renderFilters();
+        
+        facets = ['Conservation Status', 'Geographic Region', 'Habitat Type', 'Threat Level'];
         renderFacets();
     </script>
 </body>
