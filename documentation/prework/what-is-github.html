@@ -23,7 +23,145 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 120px 20px 40px 20px;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 26, 92, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D94B8A;
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FDF4F9;
+        }
+
+        .nav-logo::after {
+            content: '🪩';
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 20px 30px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(196, 168, 212, 0.2);
+            border-bottom-color: #5BBFBA;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(61, 26, 92, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 25px;
+            color: #FDF4F9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: rgba(91, 191, 186, 0.2);
+            padding-left: 30px;
+            color: #5BBFBA;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(61, 26, 92, 0.1);
+            color: #3D1A5C;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #3D1A5C;
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .back-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-3px);
         }
 
         .container {
@@ -567,7 +705,48 @@
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo">SCIENCE</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../prework.html" class="nav-link active">Prework</a>
+                    <ul class="dropdown">
+                        <li><a href="../prework.html#github">GitHub Setup</a></li>
+                        <li><a href="../prework.html#vscode">VS Code & Copilot</a></li>
+                        <li><a href="../prework.html#python">Python Environment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">Discovery Day</a>
+                    <ul class="dropdown">
+                        <li><a href="../../index.html">Overview</a></li>
+                        <li><a href="../research-questions.html">Research Questions</a></li>
+                        <li><a href="../data.html">Get to Know Your Data</a></li>
+                        <li><a href="../dashboard-builder.html">Design Your Dashboard</a></li>
+                        <li><a href="../knowledge-library-builder.html">Design Your Library</a></li>
+                        <li><a href="../analyse-guide.html">Analyse</a></li>
+                        <li><a href="../build-guide.html">Build</a></li>
+                        <li><a href="../showcase-guide.html">Showcase</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="../resources.html" class="nav-link">Resources</a>
+                    <ul class="dropdown">
+                        <li><a href="../resources.html#cv">CV Tips</a></li>
+                        <li><a href="../resources.html#interview">Interview Prep</a></li>
+                        <li><a href="../resources.html#learning">Continued Learning</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
+        <a href="../prework.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to tutorials
+        </a>
         <h1>What is GitHub?</h1>
         
         <div class="clickthrough-wrapper">
