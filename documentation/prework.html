@@ -194,9 +194,170 @@
             font-weight: 800;
         }
 
+        /* Tutorial Catalog Styles */
+        .tutorials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tutorial-card {
+            background: #FDF4F9;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            border: 3px solid transparent;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 48px rgba(217, 75, 138, 0.3);
+            border-color: #D94B8A;
+        }
+
+        .tutorial-header {
+            background: linear-gradient(135deg, #3D1A5C 0%, #5B3B7E 100%);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .tutorial-icon {
+            font-size: 3.5rem;
+            color: #D94B8A;
+            margin-bottom: 15px;
+        }
+
+        .tutorial-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tutorial-header .tutorial-subtitle {
+            color: #FFFFFF !important;
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .tutorial-body {
+            padding: 30px;
+        }
+
+        .tutorial-description {
+            color: #3D1A5C;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .tutorial-topics {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tutorial-topics li {
+            color: #3D1A5C;
+            padding: 10px 0;
+            border-bottom: 1px solid #E8D9F0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tutorial-topics li:last-child {
+            border-bottom: none;
+        }
+
+        .tutorial-topics li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #5BBFBA;
+            font-size: 1rem;
+        }
+
+        .tutorial-footer {
+            padding: 0 30px 30px;
+        }
+
+        .tutorial-duration {
+            display: inline-block;
+            background: #E8D9F0;
+            color: #3D1A5C;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .tutorial-duration i,
+        .tutorial-slides i {
+            margin-right: 5px;
+            opacity: 0.7;
+        }
+
+        .tutorial-slides {
+            display: inline-block;
+            background: #FFF4D9;
+            color: #3D1A5C;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .cta-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #D94B8A;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .cta-text i {
+            margin-left: 5px;
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(61, 26, 92, 0.95);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
+            }
+
+            .tutorials-grid {
+                grid-template-columns: 1fr;
             }
 
             .section {
@@ -250,34 +411,100 @@
     <div class="container">
         <h1>Prework & Prerequisites</h1>
 
-        <p class="intro">Before Discovery Day, make sure you have the essentials set up. This page will help you get ready with the tools and accounts you'll need.</p>
+        <p class="intro">Before Discovery Day, get familiar with the essential tools through these interactive tutorials. Click on any card to explore!</p>
 
         <div class="section">
-            <h2 class="section-title">What You'll Need</h2>
-            <p>To participate fully in Discovery Day, you'll need access to a few key tools. Don't worry—everything is free for students!</p>
+            <h2 class="section-title">Interactive Tutorials</h2>
+            <p>Learn the essentials at your own pace with our interactive click-through guides. Each tutorial takes just a few minutes and teaches you exactly what you need to know for Discovery Day.</p>
+            
+            <div class="tutorials-grid">
+                <!-- GitHub Tutorial -->
+                <a href="prework/what-is-github.html" class="tutorial-card">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon"><i class="fab fa-github"></i></div>
+                        <h3 class="tutorial-title">What is GitHub?</h3>
+                        <p class="tutorial-subtitle">Version control for beginners</p>
+                    </div>
+                    <div class="tutorial-body">
+                        <p class="tutorial-description">
+                            Learn how GitHub helps teams collaborate on projects and why it's essential for Discovery Day.
+                        </p>
+                        <ul class="tutorial-topics">
+                            <li>What GitHub is and why we use it</li>
+                            <li>Clone, commit, and push workflow</li>
+                            <li>Branches and pull requests</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-footer">
+                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 5-8 min</span>
+                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 10 slides</span>
+                        <p class="cta-text">Click to start <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
+
+                <!-- VS Code Tutorial -->
+                <a href="prework/what-is-vscode.html" class="tutorial-card">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon"><i class="fas fa-code"></i></div>
+                        <h3 class="tutorial-title">What is VS Code?</h3>
+                        <p class="tutorial-subtitle">Your coding workspace</p>
+                    </div>
+                    <div class="tutorial-body">
+                        <p class="tutorial-description">
+                            Discover how to use Visual Studio Code, the text editor you'll use to build your visualizations.
+                        </p>
+                        <ul class="tutorial-topics">
+                            <li>Opening your project folder</li>
+                            <li>Editing code with color coding</li>
+                            <li>Source Control panel for Git</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-footer">
+                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 4-6 min</span>
+                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 6 slides</span>
+                        <p class="cta-text">Click to start <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
+
+                <!-- Coming Soon Tutorial -->
+                <div class="tutorial-card coming-soon">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="tutorial-title">Data Visualization</h3>
+                        <p class="tutorial-subtitle">Creating compelling dashboards</p>
+                    </div>
+                    <div class="tutorial-body">
+                        <p class="tutorial-description">
+                            Learn the principles of effective data visualization and how to tell stories with data.
+                        </p>
+                        <ul class="tutorial-topics">
+                            <li>Choosing the right chart type</li>
+                            <li>Color and accessibility</li>
+                            <li>Dashboard design principles</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-footer">
+                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 6-8 min</span>
+                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 8 slides</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Additional Setup</h2>
+            <p>Make sure you have the following tools installed and accounts created before Discovery Day:</p>
             <ul>
-                <li><span class="highlight">GitHub Account</span> - For version control and hosting your dashboard</li>
-                <li><span class="highlight">VS Code</span> - Code editor with GitHub Copilot integration</li>
-                <li><span class="highlight">GitHub Copilot</span> - AI pair programmer (free for students)</li>
-                <li><span class="highlight">Python</span> - For data analysis in Jupyter notebooks</li>
+                <li><span class="highlight">GitHub Account</span> - Sign up at <a href="https://github.com" target="_blank" style="color: #5BBFBA;">github.com</a> (it's free!)</li>
+                <li><span class="highlight">VS Code</span> - Download from <a href="https://code.visualstudio.com" target="_blank" style="color: #5BBFBA;">code.visualstudio.com</a></li>
+                <li><span class="highlight">GitHub Copilot</span> - Free for students via <a href="https://education.github.com/pack" target="_blank" style="color: #5BBFBA;">GitHub Student Developer Pack</a></li>
+                <li><span class="highlight">Git</span> - Install from <a href="https://git-scm.com" target="_blank" style="color: #5BBFBA;">git-scm.com</a></li>
             </ul>
         </div>
-
-        <div class="section" id="github">
-            <h2 class="section-title">Setting Up GitHub</h2>
-            <p>More details coming soon...</p>
-        </div>
-
-        <div class="section" id="vscode">
-            <h2 class="section-title">Installing VS Code & Copilot</h2>
-            <p>More details coming soon...</p>
-        </div>
-
-        <div class="section" id="python">
-            <h2 class="section-title">Python Setup</h2>
-            <p>More details coming soon...</p>
-        </div>
     </div>
     </div>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>

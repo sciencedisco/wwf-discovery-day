@@ -301,15 +301,8 @@
     </div>
 
     <script>
-        // Calculate base path for GitHub Pages compatibility
-        const getBasePath = () => {
-            const path = window.location.pathname;
-            const htmlFile = 'data-viewer.html';
-            const basePath = path.substring(0, path.lastIndexOf(htmlFile));
-            return basePath;
-        };
-
-        const basePath = getBasePath();
+        // Use relative path for GitHub Pages compatibility
+        const basePath = './';
         
         const files = [
             '01-lpi-latin-america.md',

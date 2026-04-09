@@ -46,7 +46,8 @@ Use the Science Disco color palette consistently:
   - Ensure sufficient contrast for accessibility
 
 ### Content Guidelines
-- **No emojis:** Keep the interface clean and professional
+- **No emojis:** Keep the interface clean and professional—use icons instead if visual elements are needed
+- **Use sentence case:** Capitalize only the first word and proper nouns in headings, titles, and labels—not each word
 - Use clear, concise language
 - Write descriptive alt text for any images or visualizations
 - Organize content with clear headings and sections
