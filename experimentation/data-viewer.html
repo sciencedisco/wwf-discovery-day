@@ -301,8 +301,11 @@
     </div>
 
     <script>
-        // Use relative path for GitHub Pages compatibility
-        const basePath = './';
+        // Detect if we're on GitHub Pages and set the appropriate base path
+        const isGitHubPages = window.location.hostname === 'sciencedisco.github.io';
+        const basePath = isGitHubPages 
+            ? '/wwf-discovery-day/experimentation/' 
+            : './';
         
         const files = [
             '01-lpi-latin-america.md',
@@ -385,7 +388,7 @@
                 .replace(/^# (.*$)/gim, '<h1>$1</h1>')
                 // Bold
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                // Images - media folder is inside the data folder, use base path
+                // Images - use base path for GitHub Pages compatibility
                 .replace(/!\[([^\]]*)\]\(media\/([^)]+)\)/g, `<img src="${basePath}data/media/$2" alt="$1" />`)
                 // Links
                 .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
