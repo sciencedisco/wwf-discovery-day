@@ -440,8 +440,9 @@
             try {
                 contentDiv.innerHTML = '<div class="loading">Loading...</div>';
                 
-                // Use base path for GitHub Pages compatibility
-                const response = await fetch(`${basePath}data/${filename}`);
+                // Remove .md extension from URL for GitHub Pages compatibility
+                const fileUrl = filename.replace('.md', '');
+                const response = await fetch(`${basePath}data/${fileUrl}`);
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
@@ -466,7 +467,8 @@
                 contentDiv.scrollTop = 0;
                 
             } catch (error) {
-                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}<br><br>Path attempted: ${basePath}data/${filename}</div>`;
+                const fileUrl = filename.replace('.md', '');
+                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}<br><br>Path attempted: ${basePath}data/${fileUrl}</div>`;
             }
         }
 
