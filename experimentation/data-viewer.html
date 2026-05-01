@@ -19,6 +19,7 @@
             background: linear-gradient(135deg, #3D1A5C 0%, #2a1245 100%);
             color: #3D1A5C;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .header {
@@ -77,6 +78,7 @@
             color: white;
             overflow-y: auto;
             padding: 30px 20px;
+            min-width: 0;
         }
         
         .sidebar h2 {
@@ -124,6 +126,7 @@
             background: #FDF4F9;
             overflow-y: auto;
             padding: 40px;
+            min-width: 0;
         }
         
         .metadata {
@@ -164,10 +167,14 @@
         .metadata-value {
             color: #3D1A5C;
             font-weight: 600;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
         
         .markdown-content {
             line-height: 1.6;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
         
         .markdown-content h1 {
