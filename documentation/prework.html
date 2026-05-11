@@ -194,170 +194,250 @@
             font-weight: 800;
         }
 
-        /* Tutorial Catalog Styles */
-        .tutorials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+        /* Prework-Specific Styles */
+
+        .alert {
+            background: #FFF8E1;
+            border-left: 5px solid #F39C12;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
         }
 
-        .tutorial-card {
-            background: #FDF4F9;
-            border-radius: 15px;
-            padding: 0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            text-decoration: none;
-            display: block;
-            border: 3px solid transparent;
+        .alert-icon {
+            font-size: 1.5rem;
+            color: #F39C12;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        .tutorial-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 48px rgba(217, 75, 138, 0.3);
-            border-color: #D94B8A;
+        .alert-content p {
+            margin: 0 0 10px 0;
+            font-size: 0.95rem;
+            color: #3D1A5C;
+            line-height: 1.6;
         }
 
-        .tutorial-header {
-            background: linear-gradient(135deg, #3D1A5C 0%, #5B3B7E 100%);
-            padding: 30px;
-            text-align: center;
+        .alert-content p:last-child {
+            margin-bottom: 0;
         }
 
-        .tutorial-icon {
-            font-size: 3.5rem;
+        .alert-content strong {
             color: #D94B8A;
-            margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        .tutorial-title {
-            font-size: 1.8rem;
+        .form-group {
+            margin-top: 20px;
+            padding: 20px;
+            background: #F7EEF9;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
             font-weight: 800;
-            color: white;
-            margin-bottom: 10px;
+            color: #3D1A5C;
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .tutorial-header .tutorial-subtitle {
-            color: #FFFFFF !important;
-            font-size: 1rem;
-            font-weight: 600;
-            opacity: 0.95;
-        }
-
-        .tutorial-body {
-            padding: 30px;
-        }
-
-        .tutorial-description {
-            color: #3D1A5C;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .tutorial-topics {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .tutorial-topics li {
-            color: #3D1A5C;
-            padding: 10px 0;
-            border-bottom: 1px solid #E8D9F0;
+        .form-group input {
+            padding: 12px;
+            border: 2px solid #E8D9F0;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 0.95rem;
+            color: #3D1A5C;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #D94B8A;
+            box-shadow: 0 0 0 3px rgba(217, 75, 138, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #C4A8D4;
+        }
+
+        .submit-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E8D9F0;
+            text-align: center;
+        }
+
+        .step-card {
+            background: #F7EEF9;
+            border: 2px solid #E8D9F0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 20px;
+            top: 25px;
+            width: 50px;
+            height: 50px;
+            background: #D94B8A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .step-card h3 {
+            color: #3D1A5C;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-card p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .step-card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .checkpoint {
+            background: #E8F5F0;
+            border-left: 4px solid #5BBFBA;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #2a7a73;
+            font-weight: 600;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .tutorial-topics li:last-child {
-            border-bottom: none;
-        }
-
-        .tutorial-topics li::before {
-            content: "\f00c";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
+        .checkpoint::before {
+            content: "✓";
+            font-weight: 800;
+            font-size: 1.2rem;
             color: #5BBFBA;
-            font-size: 1rem;
         }
 
-        .tutorial-footer {
-            padding: 0 30px 30px;
-        }
-
-        .tutorial-duration {
-            display: inline-block;
-            background: #E8D9F0;
-            color: #3D1A5C;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-right: 10px;
-        }
-
-        .tutorial-duration i,
-        .tutorial-slides i {
-            margin-right: 5px;
-            opacity: 0.7;
-        }
-
-        .tutorial-slides {
-            display: inline-block;
-            background: #FFF4D9;
-            color: #3D1A5C;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .cta-text {
+        .download-section {
+            background: #E8F5F0;
+            border: 2px solid #5BBFBA;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
             text-align: center;
-            margin-top: 25px;
-            color: #D94B8A;
+        }
+
+        .download-section h3 {
+            color: #3D1A5C;
             font-weight: 800;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .cta-text i {
-            margin-left: 5px;
+        .download-section p {
+            color: #5B3B7E;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
-        .coming-soon {
-            opacity: 0.6;
-            pointer-events: none;
-            position: relative;
-        }
-
-        .coming-soon::after {
-            content: "Coming Soon";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(61, 26, 92, 0.95);
+        .download-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #5BBFBA;
             color: white;
-            padding: 15px 30px;
-            border-radius: 10px;
+            border: none;
+            border-radius: 30px;
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(91, 191, 186, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(91, 191, 186, 0.4);
+            background: #4a9f99;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #D94B8A;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(217, 75, 138, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(217, 75, 138, 0.4);
+            background: #c43b77;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .ready-checkpoint {
+            background: #E8F5F0;
+            border: 2px solid #5BBFBA;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            color: #2a7a73;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .ready-checkpoint::before {
+            content: "🎉 ";
+            margin-right: 5px;
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
-            }
-
-            .tutorials-grid {
-                grid-template-columns: 1fr;
             }
 
             .section {
@@ -378,9 +458,9 @@
                 <li class="nav-item">
                     <a href="prework.html" class="nav-button active">Prework</a>
                     <ul class="dropdown">
-                        <li><a href="prework.html#github">GitHub Setup</a></li>
-                        <li><a href="prework.html#vscode">VS Code & Copilot</a></li>
-                        <li><a href="prework.html#python">Python Environment</a></li>
+                        <li><a href="prework.html#setup">Setup & Requirements</a></li>
+                        <li><a href="tutorials.html">Interactive Tutorials</a></li>
+                        <li><a href="prework.html#proof">Completion Proof</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -397,7 +477,11 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="resources.html" class="nav-button">Resources</a>
+                    <a href="tutorials.html" class="nav-button">Tutorials</a>
+                </li>
+                <li class="nav-item">
+                    <li class="nav-item">
+                    <a href="resources.html" class="nav-button">After Discovery Day</a>
                     <ul class="dropdown">
                         <li><a href="resources.html#cv">CV Tips</a></li>
                         <li><a href="resources.html#interview">Interview Prep</a></li>
@@ -411,95 +495,159 @@
     <div class="container">
         <h1>Prework & Prerequisites</h1>
 
-        <p class="intro">Before Discovery Day, get familiar with the essential tools through these interactive tutorials. Click on any card to explore!</p>
+        <p class="intro">You'll set up and install some applications, test that you have all necessary components by running a notebook, and then verify you did it all by submitting a short form. This whole process should take 30–45 minutes.</p>
 
-        <div class="section">
-            <h2 class="section-title">Interactive Tutorials</h2>
-            <p>Learn the essentials at your own pace with our interactive click-through guides. Each tutorial takes just a few minutes and teaches you exactly what you need to know for Discovery Day.</p>
+        <div class="section" id="setup">
+            <h2 class="section-title">Setup & Requirements</h2>
+            <p><strong>Estimated time: 15–30 minutes</strong></p>
+            <p>Set up each component below. Work through them in order, and check off each one as you complete it.</p>
             
-            <div class="tutorials-grid">
-                <!-- GitHub Tutorial -->
-                <a href="prework/what-is-github.html" class="tutorial-card">
-                    <div class="tutorial-header">
-                        <div class="tutorial-icon"><i class="fab fa-github"></i></div>
-                        <h3 class="tutorial-title">What is GitHub?</h3>
-                        <p class="tutorial-subtitle">Version control for beginners</p>
-                    </div>
-                    <div class="tutorial-body">
-                        <p class="tutorial-description">
-                            Learn how GitHub helps teams collaborate on projects and why it's essential for Discovery Day.
-                        </p>
-                        <ul class="tutorial-topics">
-                            <li>What GitHub is and why we use it</li>
-                            <li>Clone, commit, and push workflow</li>
-                            <li>Branches and pull requests</li>
-                        </ul>
-                    </div>
-                    <div class="tutorial-footer">
-                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 5-8 min</span>
-                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 10 slides</span>
-                        <p class="cta-text">Click to start <i class="fas fa-arrow-right"></i></p>
-                    </div>
-                </a>
-
-                <!-- VS Code Tutorial -->
-                <a href="prework/what-is-vscode.html" class="tutorial-card">
-                    <div class="tutorial-header">
-                        <div class="tutorial-icon"><i class="fas fa-code"></i></div>
-                        <h3 class="tutorial-title">What is VS Code?</h3>
-                        <p class="tutorial-subtitle">Your coding workspace</p>
-                    </div>
-                    <div class="tutorial-body">
-                        <p class="tutorial-description">
-                            Discover how to use Visual Studio Code, the text editor you'll use to build your visualizations.
-                        </p>
-                        <ul class="tutorial-topics">
-                            <li>Opening your project folder</li>
-                            <li>Editing code with color coding</li>
-                            <li>Source Control panel for Git</li>
-                        </ul>
-                    </div>
-                    <div class="tutorial-footer">
-                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 4-6 min</span>
-                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 6 slides</span>
-                        <p class="cta-text">Click to start <i class="fas fa-arrow-right"></i></p>
-                    </div>
-                </a>
-
-                <!-- Coming Soon Tutorial -->
-                <div class="tutorial-card coming-soon">
-                    <div class="tutorial-header">
-                        <div class="tutorial-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3 class="tutorial-title">Data Visualization</h3>
-                        <p class="tutorial-subtitle">Creating compelling dashboards</p>
-                    </div>
-                    <div class="tutorial-body">
-                        <p class="tutorial-description">
-                            Learn the principles of effective data visualization and how to tell stories with data.
-                        </p>
-                        <ul class="tutorial-topics">
-                            <li>Choosing the right chart type</li>
-                            <li>Color and accessibility</li>
-                            <li>Dashboard design principles</li>
-                        </ul>
-                    </div>
-                    <div class="tutorial-footer">
-                        <span class="tutorial-duration"><i class="fas fa-clock"></i> 6-8 min</span>
-                        <span class="tutorial-slides"><i class="fas fa-layer-group"></i> 8 slides</span>
-                    </div>
+            <div class="alert">
+                <div class="alert-content">
+                    <p><strong>Already have some of these?</strong> If you already have GitHub, VS Code, Git, Python, or any other tool installed, feel free to skip those steps.</p>
                 </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Create a GitHub Account</h3>
+                <p><strong>What is it?</strong> GitHub is where you'll store and share your code.</p>
+                <ul>
+                    <li>Go to <a href="https://github.com" target="_blank" style="color: #5BBFBA; font-weight: 600;">github.com</a> and sign up with a personal email you'll have forever (not your school email)</li>
+                    <li>You'll create a GitHub username (or "handle") that you'll need to share later</li>
+                </ul>
+                <div class="checkpoint">Once you have a GitHub account and username, move to the next step</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Get Free GitHub Copilot (Student Access)</h3>
+                <p><strong>What is it?</strong> GitHub Copilot is an AI assistant that helps you write and understand code.</p>
+                <ul>
+                    <li>Go to <a href="https://education.github.com/pack" target="_blank" style="color: #5BBFBA; font-weight: 600;">GitHub Student Developer Pack</a></li>
+                    <li>Click "Sign up for student developer pack" and during the application, you'll be instructed to link your school email to verify you're a student</li>
+                    <li>You'll need to wait a few days for approval, but you can continue with other steps in the meantime. You'll just have limited access to GitHub Copilot until approved</li>
+                </ul>
+                <div class="checkpoint">Once your application is submitted, move to the next step</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Download and Install VS Code</h3>
+                <p><strong>What is it?</strong> VS Code is the code editor where you'll write code and run notebooks.</p>
+                <ul>
+                    <li>Go to <a href="https://code.visualstudio.com" target="_blank" style="color: #5BBFBA; font-weight: 600;">code.visualstudio.com</a> and download for your operating system</li>
+                    <li>Run the installer and follow the default steps</li>
+                    <li>Open VS Code to make sure it works</li>
+                </ul>
+                <div class="checkpoint">Once VS Code opens, move to the next step</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Install GitHub Copilot in VS Code</h3>
+                <p><strong>What is it?</strong> This adds the AI assistant to your code editor (requires GitHub Copilot approval from step 2).</p>
+                <ul>
+                    <li>In VS Code, click the Extensions icon on the left sidebar (looks like four squares)</li>
+                    <li>Search for "GitHub Copilot" and click "Install"</li>
+                    <li>Sign in with your GitHub account when prompted</li>
+                    <li>Once installed, open Copilot Chat by clicking the chat bubble icon in the left sidebar, or press <code style="background: #F7EEF9; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Ctrl+Alt+I</code> (Windows) / <code style="background: #F7EEF9; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Cmd+Alt+I</code> (Mac)</li>
+                </ul>
+                <div class="checkpoint">Once Copilot is installed and active, move to the next step</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h3>Install Git</h3>
+                <p><strong>What is it?</strong> Git is a tool that tracks changes to your code and lets you upload it to GitHub.</p>
+                <ul>
+                    <li>Go to <a href="https://git-scm.com" target="_blank" style="color: #5BBFBA; font-weight: 600;">git-scm.com</a> and download for your operating system</li>
+                    <li>Run the installer and use the default settings</li>
+                    <li>In VS Code, open a terminal via the top menu: Terminal → New Terminal, then type:<br><code style="background: #1e1e1e; color: #d4d4d4; padding: 10px 16px; border-radius: 6px; font-family: monospace; font-size: 0.95rem; display: inline-block; margin-top: 4px; user-select: all;">git --version</code></li>
+                </ul>
+                <p style="font-size: 0.88rem; color: #5B3B7E; margin-top: 12px;">&#128161; <strong>Stuck?</strong> Paste any error message into Copilot Chat and ask for help.</p>
+                <div class="checkpoint">The terminal should show something like <code style="background: #d4ede9; padding: 2px 6px; border-radius: 4px; font-family: monospace;">git version 2.x.x</code> — if you see a version number, you're good to go.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <h3>Install Python</h3>
+                <p><strong>What is it?</strong> Python is a programming language. You'll need it to run the notebooks and code during Discovery Day.</p>
+                <ul>
+                    <li>Go to <a href="https://www.python.org" target="_blank" style="color: #5BBFBA; font-weight: 600;">python.org</a> and download the latest version for your operating system</li>
+                    <li>Run the installer and use the default settings</li>
+                    <li>In VS Code, open a terminal via the top menu: Terminal → New Terminal, then type:<br><code style="background: #1e1e1e; color: #d4d4d4; padding: 10px 16px; border-radius: 6px; font-family: monospace; font-size: 0.95rem; display: inline-block; margin-top: 4px; user-select: all;">python --version</code></li>
+                </ul>
+                <p style="font-size: 0.88rem; color: #5B3B7E; margin-top: 12px;">&#128161; <strong>Stuck?</strong> Paste any error message into Copilot Chat and ask for help.</p>
+                <div class="checkpoint">The terminal should show something like <code style="background: #d4ede9; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Python 3.x.x</code> — if you see a version number, you've completed all setup!</div>
+            </div>
+        </div>
+
+        <div class="section" id="proof">
+            <h2 class="section-title">Complete Your Prework</h2>
+            <p><strong>Estimated time: 10–15 minutes</strong></p>
+            <p>Follow these three steps to complete your prework. Go at your own pace and don't worry if you get stuck—that's totally normal.</p>
+
+            <div class="download-section">
+                <h3>Step 0: Download the Test Notebook</h3>
+                <p>First, download the notebook file we've prepared for you. This is the file you'll run in VS Code.</p>
+                <a href="../analysis/living-planet-index-analysis.ipynb" download class="download-btn">↓ Download Notebook</a>
+                <p style="margin-top: 12px; font-size: 0.85rem;">Save this file to your computer. Remember where you save it!</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Run the notebook in VS Code</h3>
+                <p>In this step, you'll open the notebook you just downloaded and run it to see the charts and data.</p>
+                <p style="font-weight: 600; margin-bottom: 8px;">Here's how:</p>
+                <ul>
+                    <li>Open VS Code and drag the notebook file into it (or use File → Open File)</li>
+                    <li>Wait a few seconds for VS Code to recognize it's a Jupyter notebook</li>
+                    <li>Click the "Run All" button at the top (or use Ctrl+Enter on each cell to run them one by one)</li>
+                    <li>Watch as cells execute. You should see colorful charts and tables appear</li>
+                    <li>If something breaks, that's okay! Click on the cell with the error, then open Copilot Chat and ask: <em>"This cell is giving an error — can you help me fix it?"</em> Paste in the error message for best results</li>
+                </ul>
+                <div class="checkpoint">Once you see at least one chart or table, move to Step 2</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Use GitHub Copilot to improve something</h3>
+                <p>Now you'll use AI to make a small improvement. This is the heart of the prework—learning to work with Copilot.</p>
+                <p style="font-weight: 600; margin-bottom: 8px;">Here's how:</p>
+                <ul>
+                    <li>Open Copilot Chat in VS Code (Ctrl+Shift+I on Windows, Cmd+Shift+I on Mac)</li>
+                    <li>Ask Copilot a real question about what you see, for example:</li>
+                    <li style="margin-left: 20px;">"How can I make this chart title more descriptive?"</li>
+                    <li style="margin-left: 20px;">"What does this code do in plain English?"</li>
+                    <li style="margin-left: 20px;">"Can you suggest a better color scheme for this chart?"</li>
+                    <li>Read what Copilot suggests. If it makes sense to you, apply the change to the notebook</li>
+                    <li>Run the notebook again (Run All) to make sure your change works. Does it look better?</li>
+                </ul>
+                <div class="checkpoint">Once you've made one change and run the notebook again, you're ready for Step 3</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Capture your work</h3>
+                <p>Last step! Take a screenshot showing both your notebook results and the Copilot chat panel.</p>
+                <p style="font-weight: 600; margin-bottom: 8px;">Here's how:</p>
+                <ul>
+                    <li>Arrange your screen so you can see both the notebook with your results AND the Copilot chat panel in one view</li>
+                    <li>Take a screenshot (Mac: Cmd+Shift+4, Windows: Win+Shift+S, or just use Print Screen)</li>
+                    <li>Save the screenshot somewhere easy to find on your computer</li>
+                </ul>
+                <div class="checkpoint">Great! You've completed all three steps. Time to submit.</div>
             </div>
         </div>
 
         <div class="section">
-            <h2 class="section-title">Additional Setup</h2>
-            <p>Make sure you have the following tools installed and accounts created before Discovery Day:</p>
-            <ul>
-                <li><span class="highlight">GitHub Account</span> - Sign up at <a href="https://github.com" target="_blank" style="color: #5BBFBA;">github.com</a> (it's free!)</li>
-                <li><span class="highlight">VS Code</span> - Download from <a href="https://code.visualstudio.com" target="_blank" style="color: #5BBFBA;">code.visualstudio.com</a></li>
-                <li><span class="highlight">GitHub Copilot</span> - Free for students via <a href="https://education.github.com/pack" target="_blank" style="color: #5BBFBA;">GitHub Student Developer Pack</a></li>
-                <li><span class="highlight">Git</span> - Install from <a href="https://git-scm.com" target="_blank" style="color: #5BBFBA;">git-scm.com</a></li>
-            </ul>
+            <h2 class="section-title">Submit Your Prework</h2>
+            <p><strong>Estimated time: 5 minutes</strong></p>
+            <p>Once you've completed all three prework steps above, submit your work using the form below. You'll upload your screenshot and provide your GitHub handle.</p>
+            <div class="submit-section">
+                <a href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" class="submit-btn">Submit Your Prework →</a>
+            </div>
         </div>
     </div>
     </div>
